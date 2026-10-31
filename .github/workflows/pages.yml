@@ -1,0 +1,51 @@
+# Publishes site/ (the introduction page) to GitHub Pages.
+# Needs, once: Settings > Pages > Build and deployment > Source: GitHub Actions.
+# The lite page for the phone (site/m/) gets the latest release's .sisx next to it, so the
+# phone downloads from the page's own host; build.yml runs this again after a release.
+name: Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: The latest release's package for the lite page
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release download --repo "$GITHUB_REPOSITORY" --pattern 'ntp-time-sync-*.sisx' --dir site/m; then
+            file="$(cd site/m && ls ntp-time-sync-*.sisx | head -n 1)"
+            version="${file#ntp-time-sync-}"
+            version="${version%.sisx}"
+            sed -i -e "s#href=\"[^\"]*\" id=\"dl\"#href=\"$file\" id=\"dl\"#" \
+                   -e "s#<!--VERSION--># $version#" site/m/*.html
+            echo "Lite page: $file" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "::notice::No release yet: the lite page links the Releases page"
+          fi
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v5

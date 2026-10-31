@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.2//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="HandheldFriendly" content="true" />
+<title>NTP Time Sync - Keeps the Nokia E72's clock right</title>
+<link rel="icon" type="image/png" href="icon.png" />
+<!-- The lite page for the phone's own browsers, in English. Same text as index.html;
+     the Pages workflow fills in id="dl" and the VERSION comment here too. -->
+<style type="text/css">
+body { margin: 0; padding: 0; background: #ffffff; color: #222222; font-family: sans-serif; }
+a { color: #1a4fb8; }
+.top { background: #1e5fd9; color: #ffffff; padding: 5px 6px; }
+.top img { float: left; margin: 0 6px 0 0; border: 0; }
+.top b { font-size: 1.25em; }
+.top span { display: block; margin-left: 38px; font-size: 0.85em; }
+.clr { clear: both; }
+.dl { margin: 6px; padding: 6px; background: #fff3e3; border: 1px solid #ff8a00; text-align: center; }
+.dl a { font-size: 1.15em; font-weight: bold; color: #1e5fd9; }
+.dl small { display: block; margin-top: 3px; color: #6b5a3a; }
+h2 { margin: 6px 0 0 0; padding: 3px 6px; background: #e8eef8; color: #1a4fb8; font-size: 1em; border-top: 1px solid #d3deef; }
+.s { padding: 4px 6px; }
+ol, ul { margin: 0; padding: 0 0 0 18px; }
+li { margin: 2px 0; }
+.k { font-family: monospace; color: #000000; background: #eeeeee; }
+.foot { margin-top: 8px; padding: 6px; background: #1b2333; color: #c3cbd8; font-size: 0.85em; }
+.foot a { color: #ffffff; }
+</style>
+</head>
+<body>
+
+<div class="top">
+<img src="icon.png" width="32" height="32" alt="" />
+<b>NTP Time Sync</b>
+<span>Keeps the Nokia E72's clock right, over Wi-Fi</span>
+<div class="clr"></div>
+</div>
+
+<div class="dl">
+<a href="https://github.com/minhkhoi-dev/ntp-time-sync-s60/releases/latest" id="dl">Download NTP Time Sync<!--VERSION--> (.sisx)</a>
+<small>Needs a hacked phone (InstallServer patch).</small>
+</div>
+
+<h2>Install</h2>
+<div class="s">
+<ol>
+<li>If the phone has a SIM: turn off <b>Network operator time</b> (Ctrl. panel &gt; Settings &gt; General &gt; Date and time).</li>
+<li>Download the .sisx above and install it to phone memory (C:).</li>
+<li>When the phone shows its access point list, pick your Wi-Fi. It syncs right away.</li>
+<li>Open <b>NTP Time Sync</b> from Applications to see the status, or choose <b>Sync now</b>.</li>
+</ol>
+</div>
+
+<h2>Features</h2>
+<div class="s">
+<ul>
+<li>Wi-Fi only: no SIM needed, no mobile data used.</li>
+<li>Syncs at boot, then every 6 hours (15 minutes to 1 week).</li>
+<li>Asks the server 3 times and keeps the best answer.</li>
+<li>Off by less than 0.5 s? It leaves the clock alone. It only sets UTC; your time zone stays.</li>
+<li>Syncs again when something else moves the clock.</li>
+<li>Screens in Vietnamese or English.</li>
+</ul>
+</div>
+
+<h2>Good to know</h2>
+<div class="s">
+<ul>
+<li><b>Updating:</b> if the installer says ntpsyncd is in use, open the app and choose Stop background sync; after installing, choose Start background sync.</li>
+<li><b>Uninstalling:</b> choose Stop background sync first.</li>
+<li><b>Files:</b> settings in <span class="k">C:\Data\ntpsyncd.ini</span>, log in <span class="k">C:\Data\ntpsyncd.log</span>. The log stays on the phone.</li>
+<li><b>Can't download?</b> The stock S60 browser only has TLS 1.0 and GitHub needs TLS 1.2. Install the TLS patch (<a href="https://nnproject.cc/tls/">nnproject.cc/tls</a>), or download the file on a computer and copy it to the phone.</li>
+</ul>
+</div>
+
+<div class="foot">
+<a href="index.html">Tiếng Việt</a> | <a href="../en/?full">Full page</a> | <a href="https://github.com/minhkhoi-dev/ntp-time-sync-s60">GitHub</a><br />
+NTP Time Sync, a personal project by Khoi Nguyen.
+</div>
+
+</body>
+</html>

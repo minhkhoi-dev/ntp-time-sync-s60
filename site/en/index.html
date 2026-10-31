@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+// The phones' own browsers (S60, Opera Mini) get the lite page; ?full keeps this one.
+if (!/[?&]full/.test(location.search) && /SymbianOS|SymbOS|Series ?60|Opera Mini|J2ME|MIDP/i.test(navigator.userAgent)) location.replace("../m/en.html");
+</script>
+<title>NTP Time Sync · Keeps the Nokia E72's clock right</title>
+<meta name="description" content="NTP Time Sync sets the Nokia E72's clock (Symbian S60 3rd Edition FP2) from NTP servers over Wi-Fi, on its own.">
+<meta property="og:title" content="NTP Time Sync · Keeps the Nokia E72's clock right">
+<meta property="og:description" content="Syncs the clock with NTP servers over Wi-Fi at boot and every few hours. No SIM needed, no mobile data used.">
+<meta property="og:locale" content="en_US">
+<meta name="theme-color" content="#1E5FD9">
+<link rel="icon" href="../icon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="vi" href="../">
+<link rel="alternate" hreflang="en" href="./">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="../icon.svg" alt="" width="30" height="30">NTP Time Sync</a>
+    <nav aria-label="Sections">
+      <a href="#features">Features</a>
+      <a href="#settings">Settings</a>
+      <a href="#install">Install</a>
+      <a href="#build">Source</a>
+      <a class="gh" href="https://github.com/minhkhoi-dev/ntp-time-sync-s60">GitHub</a>
+    </nav>
+    <div class="lang" aria-label="Language"><a href="../" hreflang="vi" lang="vi">VI</a><a href="./" aria-current="page">EN</a></div>
+  </div>
+</header>
+
+<main>
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow"><span class="dot"></span>Nokia E72 · Symbian S60 3rd Edition FP2</span>
+      <h1 id="hero-title">Keep the Nokia E72's clock <span class="hl">right</span>.</h1>
+      <p class="lede">NTP Time Sync gets the exact time from NTP servers over Wi-Fi and sets the phone's clock: at boot, then every 6 hours, all on its own. No SIM needed, no mobile data used.</p>
+      <div class="cta">
+        <a class="btn btn-primary js-dl" href="https://github.com/minhkhoi-dev/ntp-time-sync-s60/releases/latest">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3v10m0 0-4-4m4 4 4-4M4 16h12"/></svg>
+          Download the .sisx
+        </a>
+        <a class="btn btn-ghost" href="https://github.com/minhkhoi-dev/ntp-time-sync-s60">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+          Source on GitHub
+        </a>
+      </div>
+      <p class="meta"><span class="js-ver" data-fmt="Version %s">Latest release on GitHub</span> · tested on a real E72 · needs a hacked phone (<a href="#install">see Install</a>)</p>
+    </div>
+
+    <figure class="device" style="margin:0">
+      <div class="phone" aria-hidden="true">
+        <div class="earpiece"></div>
+        <div class="bezel">
+          <div class="screen">
+            <div class="s60">
+              <div class="sp">
+                <svg class="wlan" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round"><path d="M1.5 5a6.5 6.5 0 0 1 9 0M3.3 7a4 4 0 0 1 5.4 0"/><circle cx="6" cy="9.2" r="1" fill="#fff" stroke="none"/></svg>
+                <span class="title">NTP Time Sync</span>
+                <span class="bat"><i></i><i></i><i></i><i></i><b></b></span>
+              </div>
+              <ol class="lst" id="rows">
+                <li class="hi"><b>Background sync</b><span id="rowState">Running</span></li>
+                <li><b>Last sync</b><span id="rowLast">03:41, clock was right (-0.391 s)</span></li>
+                <li><b>Time from</b><span>pool.ntp.org</span></li>
+                <li><b>Over Wi-Fi</b><span>Home</span></li>
+              </ol>
+              <div class="cp">
+                <span>Options</span>
+                <span class="mid"><span id="clock">09:45</span></span>
+                <span>Exit</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="navkeys">
+          <span class="nk call"></span><span class="nk"></span><span class="dpad" id="dpad"></span><span class="nk"></span><span class="nk end"></span>
+        </div>
+        <div class="kb">
+          <span class="key">q</span><span class="key">w</span><span class="key">e</span><span class="key">r<sup>1</sup></span><span class="key">t<sup>2</sup></span><span class="key">y<sup>3</sup></span><span class="key">u<sup>*</sup></span><span class="key">i</span><span class="key">o</span><span class="key">p</span>
+          <span class="key">a</span><span class="key">s</span><span class="key">d</span><span class="key">f<sup>4</sup></span><span class="key">g<sup>5</sup></span><span class="key">h<sup>6</sup></span><span class="key">j<sup>#</sup></span><span class="key">k</span><span class="key">l</span><span class="key mod">⌫</span>
+          <span class="key mod">⇧</span><span class="key">z</span><span class="key">x</span><span class="key">c</span><span class="key">v<sup>7</sup></span><span class="key">b<sup>8</sup></span><span class="key">n<sup>9</sup></span><span class="key">m<sup>0</sup></span><span class="key">.</span><span class="key mod">↵</span>
+          <span class="key mod">Fn</span><span class="key mod">Ctrl</span><span class="key mod">Sym</span><span class="key space"></span><span class="key">,</span><span class="key">?</span><span class="key mod">⇧</span>
+        </div>
+      </div>
+      <figcaption class="demo-cap" id="cap" data-fast="%s s fast" data-slow="%s s slow" data-ok="on time">
+        <span class="lbl">Phone clock</span><kbd id="capClock">09:45:02</kbd><span class="out" id="capState">214 s fast</span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="features" class="alt" aria-labelledby="features-title">
+  <div class="wrap">
+    <p class="kicker">Features</p>
+    <h2 id="features-title">The right time, without thinking about it</h2>
+    <p class="sub">A small background service does the syncing. The NTP Time Sync app shows you what it is doing and changes its settings.</p>
+    <div class="grid3">
+      <article class="card">
+        <div class="sample"><span class="mk" title="Wi-Fi"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round"><path d="M1.5 5a6.5 6.5 0 0 1 9 0M3.3 7a4 4 0 0 1 5.4 0"/><circle cx="6" cy="9.2" r="1" fill="#fff" stroke="none"/></svg></span><span class="res">Wi-Fi</span><span class="tag">never 3G</span></div>
+        <h3>Wi-Fi only</h3>
+        <p>It uses the Wi-Fi connection that is up, or switches on a Wi-Fi access point you picked, without asking again. It never turns on 3G or GPRS, so the phone needs no SIM.</p>
+      </article>
+      <article class="card">
+        <div class="sample"><span class="res">6 hours</span><span class="tag">apart</span></div>
+        <h3>Runs in the background</h3>
+        <p>Starts at boot, syncs about a minute later, then every 6 hours. The interval goes from 15 minutes to 1 week.</p>
+      </article>
+      <article class="card">
+        <div class="sample"><kbd class="k">×3</kbd><span class="to">→</span><span class="res">39 ms</span><span class="tag">round trip</span></div>
+        <h3>Keeps the best answer</h3>
+        <p>Each sync asks the server 3 times and keeps the answer with the shortest round trip. Replies are checked the way RFC 4330 asks; stray packets and unsynchronized servers are dropped.</p>
+      </article>
+      <article class="card">
+        <div class="sample"><span class="res strike">-0.391 s</span><span class="to">→</span><span class="tag">left alone</span></div>
+        <h3>No needless nudges</h3>
+        <p>Off by less than 0.5 s? It leaves the clock alone (the threshold is a setting). It only sets UTC, so your time zone and daylight saving time stay as they are.</p>
+      </article>
+      <article class="card">
+        <div class="sample"><span class="res">+214 s</span><span class="to">→</span><span class="res">0 s</span></div>
+        <h3>Watches for clock changes</h3>
+        <p>If something else moves the clock, like network operator time or another app, it syncs again 30 s later. At most once per 15 minutes, so it never fights in a loop.</p>
+      </article>
+      <article class="card">
+        <div class="sample"><span class="res">Tiếng Việt</span><span class="to">/</span><span class="res">English</span></div>
+        <h3>An app to go with it</h3>
+        <p>See the status, sync now, change the settings and read the log, right on the phone. Its screens are in Vietnamese or English.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="how-title">
+  <div class="wrap">
+    <p class="kicker">How it works</p>
+    <h2 id="how-title">Three steps, a few seconds</h2>
+    <p class="sub">Each sync is just a few small packets over Wi-Fi.</p>
+    <ol class="steps">
+      <li><strong>Time to sync</strong>At boot, on schedule, when you choose Sync now, or when something else has just moved the clock.</li>
+      <li><strong>Find Wi-Fi</strong>It uses the Wi-Fi connection that is up, or else switches on a saved access point. No Wi-Fi? It tries again later.</li>
+      <li><strong>Ask and set</strong>It asks an NTP server 3 times, keeps the best answer, and sets the clock if it is off by more than the threshold.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="settings" class="alt" aria-labelledby="settings-title">
+  <div class="wrap">
+    <p class="kicker">Settings</p>
+    <h2 id="settings-title">Every setting, right on the phone</h2>
+    <p class="sub">In NTP Time Sync, choose Options › Settings. A change is saved and applied at once.</p>
+    <div class="card">
+      <table class="set">
+        <thead><tr><th>Setting</th><th>Default</th><th>Choices</th></tr></thead>
+        <tbody>
+          <tr><td>Wi-Fi access points</td><td>The Wi-Fi you pick at install</td><td>The phone's Wi-Fi access points, ticked one by one</td></tr>
+          <tr><td>Sync interval</td><td>6 hours</td><td>15 minutes to 1 week</td></tr>
+          <tr><td>Correction threshold</td><td>0.5 s</td><td>0.1 to 5 s</td></tr>
+          <tr><td>Watch clock changes</td><td>On</td><td>On or Off</td></tr>
+          <tr><td>NTP servers</td><td>vn, asia and pool.ntp.org</td><td>Up to 5, one per line</td></tr>
+          <tr><td>Language</td><td>Tiếng Việt</td><td>Tiếng Việt or English</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">All settings live in <code>C:\Data\ntpsyncd.ini</code>, which you can also edit by hand with X-plore. The log is <code>C:\Data\ntpsyncd.log</code>; the app shows it under Options › View log.</p>
+  </div>
+</section>
+
+<section id="install" aria-labelledby="install-title">
+  <div class="wrap">
+    <p class="kicker">Install</p>
+    <h2 id="install-title">Put it on your phone</h2>
+    <p class="sub">One package, installed like any other Symbian app.</p>
+    <div class="install">
+      <ol class="howto">
+        <li><strong>Turn off network operator time</strong> if the phone has a SIM: Ctrl. panel › Settings › General › Date and time › <i class="vi">Network operator time</i>: Off. Otherwise the network and NTP Time Sync take turns setting the clock.</li>
+        <li><strong>Download</strong> the latest <code class="js-file">ntp-time-sync-x.y.z.sisx</code> from <a class="js-dl" href="https://github.com/minhkhoi-dev/ntp-time-sync-s60/releases/latest">Releases</a>, with the phone's browser, or on a computer and copy it over.</li>
+        <li><strong>Install it.</strong> Everything goes to phone memory (C:). A few seconds later the phone shows its access point list: pick your Wi-Fi. It syncs right away and remembers that Wi-Fi for next time.</li>
+        <li><strong>Open NTP Time Sync</strong> from Applications to see the status. Choose <i class="vi">Sync now</i>, or press the selection key, to sync at any time.</li>
+      </ol>
+      <div>
+        <div class="card req">
+          <h3>You need</h3>
+          <ul>
+            <li><strong>A Nokia E72</strong> (S60 3rd Edition Feature Pack 2, Symbian OS 9.3). NTP Time Sync was written and tested on it. Other S60 3rd Edition phones may work but are untested.</li>
+            <li><strong>A hacked phone</strong> (InstallServer patch). Setting the system time needs the WriteDeviceData capability, which a self-signed package only gets on a patched phone.</li>
+            <li><strong>Wi-Fi that lets NTP through</strong> (UDP port 123). Almost every home network does.</li>
+          </ul>
+        </div>
+        <div class="card good">
+          <h3>Good to know</h3>
+          <ul>
+            <li><strong>Updating:</strong> if the installer says ntpsyncd is in use, open the app and choose <i class="vi">Stop background sync</i>; after installing, choose <i class="vi">Start background sync</i>.</li>
+            <li><strong>Uninstalling:</strong> choose Stop background sync first. Your settings file, <code>C:\Data\ntpsyncd.ini</code>, is kept.</li>
+            <li><strong>Privacy:</strong> it only talks to the NTP servers in its settings. The log stays on the phone (about 128 KB at most) and is never sent anywhere.</li>
+            <li><strong>Can't download on the phone?</strong> GitHub only accepts TLS 1.2, and the stock S60 browser only has TLS 1.0. Install the <a href="https://nnproject.cc/tls/">TLS patch</a>, or download on a computer and copy the file over.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="build" class="alt" aria-labelledby="build-title">
+  <div class="wrap build">
+    <div>
+      <p class="kicker">Source</p>
+      <h2 id="build-title">Build it yourself</h2>
+      <p>The build runs in a public Docker image with the S60 3rd Edition FP2 SDK, GnuPoc and GCCE, so all you need is a Mac, Linux or Windows (WSL) machine with Docker.</p>
+      <p>GitHub Actions runs the same build on every push. The files on the Releases page come from it, built from the tagged commit.</p>
+    </div>
+    <pre><code><span class="c"># test the NTP maths with your computer's compiler</span>
+<span class="p">$ </span>g++ -std=c++98 -Itest/shim -Iinc \
+    test/test_ntppacket.cpp src/ntppacket.cpp -o t &amp;&amp; ./t
+
+<span class="c"># make the package: sis/ntpsyncd.sisx</span>
+<span class="p">$ </span>bash group/docker-build.sh</code></pre>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="./"><img src="../icon.svg" alt="" width="24" height="24">NTP Time Sync</a>
+    <p>A personal project by <a href="https://github.com/minhkhoi-dev">Khoi Nguyen</a>. Not affiliated with Nokia, HMD Global or the NTP Pool Project. <a href="../m/en.html">Lite page for S60 phones</a>.</p>
+  </div>
+</footer>
+
+<script src="../app.js"></script>
+</body>
+</html>

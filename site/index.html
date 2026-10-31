@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+// The phones' own browsers (S60, Opera Mini) get the lite page; ?full keeps this one.
+if (!/[?&]full/.test(location.search) && /SymbianOS|SymbOS|Series ?60|Opera Mini|J2ME|MIDP/i.test(navigator.userAgent)) location.replace("m/");
+</script>
+<title>NTP Time Sync · Đồng hồ luôn đúng giờ cho Nokia E72</title>
+<meta name="description" content="NTP Time Sync chỉnh đồng hồ Nokia E72 (Symbian S60 3rd Edition FP2) theo giờ chuẩn từ server NTP, qua Wi-Fi, hoàn toàn tự động.">
+<meta property="og:title" content="NTP Time Sync · Đồng hồ luôn đúng giờ cho Nokia E72">
+<meta property="og:description" content="Tự đồng bộ đồng hồ với server NTP qua Wi-Fi khi bật máy và cứ vài giờ một lần. Không cần SIM, không tốn dữ liệu di động.">
+<meta property="og:locale" content="vi_VN">
+<meta name="theme-color" content="#1E5FD9">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="vi" href="./">
+<link rel="alternate" hreflang="en" href="en/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="icon.svg" alt="" width="30" height="30">NTP Time Sync</a>
+    <nav aria-label="Các phần">
+      <a href="#features">Tính năng</a>
+      <a href="#settings">Tùy chỉnh</a>
+      <a href="#install">Cài đặt</a>
+      <a href="#build">Mã nguồn</a>
+      <a class="gh" href="https://github.com/minhkhoi-dev/ntp-time-sync-s60">GitHub</a>
+    </nav>
+    <div class="lang" aria-label="Ngôn ngữ"><a href="./" aria-current="page">VI</a><a href="en/" hreflang="en" lang="en">EN</a></div>
+  </div>
+</header>
+
+<main>
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow"><span class="dot"></span>Nokia E72 · Symbian S60 3rd Edition FP2</span>
+      <h1 id="hero-title">Giữ đồng hồ Nokia E72 <span class="hl">luôn đúng giờ</span>.</h1>
+      <p class="lede">NTP Time Sync lấy giờ chuẩn từ server NTP qua Wi-Fi rồi chỉnh đồng hồ của máy: khi bật máy, rồi cứ 6 giờ một lần, hoàn toàn tự động. Không cần SIM, không tốn dữ liệu di động.</p>
+      <div class="cta">
+        <a class="btn btn-primary js-dl" href="https://github.com/minhkhoi-dev/ntp-time-sync-s60/releases/latest">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3v10m0 0-4-4m4 4 4-4M4 16h12"/></svg>
+          Tải file .sisx
+        </a>
+        <a class="btn btn-ghost" href="https://github.com/minhkhoi-dev/ntp-time-sync-s60">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+          Mã nguồn trên GitHub
+        </a>
+      </div>
+      <p class="meta"><span class="js-ver" data-fmt="Phiên bản %s">Bản mới nhất trên GitHub</span> · đã chạy thử trên E72 thật · cần máy đã hack (<a href="#install">xem Cài đặt</a>)</p>
+    </div>
+
+    <figure class="device" style="margin:0">
+      <div class="phone" aria-hidden="true">
+        <div class="earpiece"></div>
+        <div class="bezel">
+          <div class="screen">
+            <div class="s60">
+              <div class="sp">
+                <svg class="wlan" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round"><path d="M1.5 5a6.5 6.5 0 0 1 9 0M3.3 7a4 4 0 0 1 5.4 0"/><circle cx="6" cy="9.2" r="1" fill="#fff" stroke="none"/></svg>
+                <span class="title">NTP Time Sync</span>
+                <span class="bat"><i></i><i></i><i></i><i></i><b></b></span>
+              </div>
+              <ol class="lst" id="rows">
+                <li class="hi"><b>Chạy nền</b><span id="rowState">Đang chạy</span></li>
+                <li><b>Lần đồng bộ cuối</b><span id="rowLast">03:41, giờ đã đúng (-0.391 s)</span></li>
+                <li><b>Lấy giờ từ</b><span>vn.pool.ntp.org</span></li>
+                <li><b>Qua Wi-Fi</b><span>Nhà</span></li>
+              </ol>
+              <div class="cp">
+                <span>Tùy chọn</span>
+                <span class="mid"><span id="clock">09:45</span></span>
+                <span>Thoát</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="navkeys">
+          <span class="nk call"></span><span class="nk"></span><span class="dpad" id="dpad"></span><span class="nk"></span><span class="nk end"></span>
+        </div>
+        <div class="kb">
+          <span class="key">q</span><span class="key">w</span><span class="key">e</span><span class="key">r<sup>1</sup></span><span class="key">t<sup>2</sup></span><span class="key">y<sup>3</sup></span><span class="key">u<sup>*</sup></span><span class="key">i</span><span class="key">o</span><span class="key">p</span>
+          <span class="key">a</span><span class="key">s</span><span class="key">d</span><span class="key">f<sup>4</sup></span><span class="key">g<sup>5</sup></span><span class="key">h<sup>6</sup></span><span class="key">j<sup>#</sup></span><span class="key">k</span><span class="key">l</span><span class="key mod">⌫</span>
+          <span class="key mod">⇧</span><span class="key">z</span><span class="key">x</span><span class="key">c</span><span class="key">v<sup>7</sup></span><span class="key">b<sup>8</sup></span><span class="key">n<sup>9</sup></span><span class="key">m<sup>0</sup></span><span class="key">.</span><span class="key mod">↵</span>
+          <span class="key mod">Fn</span><span class="key mod">Ctrl</span><span class="key mod">Sym</span><span class="key space"></span><span class="key">,</span><span class="key">?</span><span class="key mod">⇧</span>
+        </div>
+      </div>
+      <figcaption class="demo-cap" id="cap" data-fast="nhanh %s giây" data-slow="chậm %s giây" data-ok="đúng giờ">
+        <span class="lbl">Đồng hồ máy</span><kbd id="capClock">09:45:02</kbd><span class="out" id="capState">nhanh 214 giây</span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="features" class="alt" aria-labelledby="features-title">
+  <div class="wrap">
+    <p class="kicker">Tính năng</p>
+    <h2 id="features-title">Đúng giờ mà không phải nghĩ tới</h2>
+    <p class="sub">Một dịch vụ nhỏ chạy nền lo việc đồng bộ. Ứng dụng NTP Time Sync cho bạn xem nó đang làm gì và đổi cài đặt.</p>
+    <div class="grid3">
+      <article class="card">
+        <div class="sample"><span class="mk" title="Wi-Fi"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round"><path d="M1.5 5a6.5 6.5 0 0 1 9 0M3.3 7a4 4 0 0 1 5.4 0"/><circle cx="6" cy="9.2" r="1" fill="#fff" stroke="none"/></svg></span><span class="res">Wi-Fi</span><span class="tag">không dùng 3G</span></div>
+        <h3>Chỉ dùng Wi-Fi</h3>
+        <p>Dùng kết nối Wi-Fi đang có, hoặc tự bật điểm truy cập Wi-Fi bạn đã chọn mà không hỏi lại. Không bao giờ bật 3G hay GPRS, nên máy không cần SIM.</p>
+      </article>
+      <article class="card">
+        <div class="sample"><span class="res">6 giờ</span><span class="tag">một lần</span></div>
+        <h3>Tự chạy nền</h3>
+        <p>Chạy khi bật máy, đồng bộ khoảng một phút sau đó, rồi cứ 6 giờ một lần. Chu kỳ chọn được từ 15 phút tới 1 tuần.</p>
+      </article>
+      <article class="card">
+        <div class="sample"><kbd class="k">×3</kbd><span class="to">→</span><span class="res">39 ms</span><span class="tag">khứ hồi</span></div>
+        <h3>Giữ câu trả lời tốt nhất</h3>
+        <p>Mỗi lần hỏi server 3 lần và giữ lần có thời gian khứ hồi ngắn nhất. Gói tin được kiểm tra đúng như RFC 4330 yêu cầu; gói lạ hay server chưa đồng bộ đều bị bỏ.</p>
+      </article>
+      <article class="card">
+        <div class="sample"><span class="res strike">-0.391 s</span><span class="to">→</span><span class="tag">để yên</span></div>
+        <h3>Không chỉnh vặt</h3>
+        <p>Lệch dưới 0,5 giây thì để yên (ngưỡng này chỉnh được). Máy chỉ được đặt giờ UTC, nên múi giờ và giờ mùa hè vẫn theo cài đặt của bạn.</p>
+      </article>
+      <article class="card">
+        <div class="sample"><span class="res">+214 s</span><span class="to">→</span><span class="res">0 s</span></div>
+        <h3>Canh khi giờ bị đổi</h3>
+        <p>Nếu thứ khác đổi giờ máy, như giờ nhà mạng hay một ứng dụng khác, 30 giây sau nó đồng bộ lại. Tối đa 15 phút một lần, nên không bao giờ giằng co.</p>
+      </article>
+      <article class="card">
+        <div class="sample"><span class="res">Tiếng Việt</span><span class="to">/</span><span class="res">English</span></div>
+        <h3>Ứng dụng đi kèm</h3>
+        <p>Xem trạng thái, đồng bộ ngay, đổi cài đặt và đọc nhật ký ngay trên máy. Màn hình bằng tiếng Việt hoặc tiếng Anh.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="how-title">
+  <div class="wrap">
+    <p class="kicker">Cách hoạt động</p>
+    <h2 id="how-title">Ba bước, vài giây</h2>
+    <p class="sub">Mỗi lần đồng bộ chỉ là vài gói tin nhỏ qua Wi-Fi.</p>
+    <ol class="steps">
+      <li><strong>Tới giờ đồng bộ</strong>Khi bật máy, theo chu kỳ, khi bạn chọn Đồng bộ ngay, hoặc khi thứ khác vừa đổi giờ máy.</li>
+      <li><strong>Tìm Wi-Fi</strong>Dùng kết nối Wi-Fi đang có, nếu không thì bật điểm truy cập đã chọn. Không có Wi-Fi thì để lần sau.</li>
+      <li><strong>Hỏi giờ và chỉnh</strong>Hỏi server NTP 3 lần, giữ câu trả lời tốt nhất, rồi chỉnh đồng hồ nếu lệch quá ngưỡng.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="settings" class="alt" aria-labelledby="settings-title">
+  <div class="wrap">
+    <p class="kicker">Tùy chỉnh</p>
+    <h2 id="settings-title">Mọi cài đặt ngay trên máy</h2>
+    <p class="sub">Trong NTP Time Sync, chọn Tùy chọn › Cài đặt. Thay đổi được lưu và áp dụng ngay.</p>
+    <div class="card">
+      <table class="set">
+        <thead><tr><th>Cài đặt</th><th>Mặc định</th><th>Chọn được</th></tr></thead>
+        <tbody>
+          <tr><td>Điểm truy cập Wi-Fi</td><td>Wi-Fi bạn chọn lúc cài</td><td>Các Wi-Fi của máy, đánh dấu từng cái</td></tr>
+          <tr><td>Chu kỳ đồng bộ</td><td>6 giờ</td><td>15 phút tới 1 tuần</td></tr>
+          <tr><td>Ngưỡng chỉnh giờ</td><td>0,5 giây</td><td>0,1 tới 5 giây</td></tr>
+          <tr><td>Theo dõi đổi giờ</td><td>Bật</td><td>Bật hoặc Tắt</td></tr>
+          <tr><td>Server NTP</td><td>vn, asia và pool.ntp.org</td><td>Tối đa 5, mỗi dòng một server</td></tr>
+          <tr><td>Ngôn ngữ</td><td>Tiếng Việt</td><td>Tiếng Việt hoặc English</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Mọi cài đặt nằm trong <code>C:\Data\ntpsyncd.ini</code>, sửa tay bằng X-plore cũng được. Nhật ký ở <code>C:\Data\ntpsyncd.log</code>, xem được trong app ở Tùy chọn › Xem log.</p>
+  </div>
+</section>
+
+<section id="install" aria-labelledby="install-title">
+  <div class="wrap">
+    <p class="kicker">Cài đặt</p>
+    <h2 id="install-title">Cài vào máy của bạn</h2>
+    <p class="sub">Một file cài đặt, cài như mọi ứng dụng Symbian khác.</p>
+    <div class="install">
+      <ol class="howto">
+        <li><strong>Tắt giờ nhà mạng</strong> nếu máy có SIM: Ctrl. panel › Settings › General › Date and time › <i class="vi">Network operator time</i>: Off. Nếu không, nhà mạng và NTP Time Sync sẽ thay nhau chỉnh giờ.</li>
+        <li><strong>Tải</strong> file <code class="js-file">ntp-time-sync-x.y.z.sisx</code> mới nhất ở trang <a class="js-dl" href="https://github.com/minhkhoi-dev/ntp-time-sync-s60/releases/latest">Releases</a>, bằng trình duyệt của điện thoại, hoặc tải về máy tính rồi chép sang điện thoại.</li>
+        <li><strong>Cài đặt.</strong> Mọi thứ vào bộ nhớ máy (C:). Vài giây sau, máy hiện danh sách điểm truy cập: chọn Wi-Fi của bạn. Máy đồng bộ ngay và nhớ Wi-Fi đó cho các lần sau.</li>
+        <li><strong>Mở NTP Time Sync</strong> trong Applications để xem trạng thái. Chọn <i class="vi">Đồng bộ ngay</i>, hoặc bấm phím giữa, để đồng bộ bất cứ lúc nào.</li>
+      </ol>
+      <div>
+        <div class="card req">
+          <h3>Bạn cần có</h3>
+          <ul>
+            <li><strong>Nokia E72</strong> (S60 3rd Edition Feature Pack 2, Symbian OS 9.3). NTP Time Sync được viết và chạy thử trên máy này. Các máy S60 3rd Edition khác có thể chạy được nhưng chưa được thử.</li>
+            <li><strong>Máy đã hack</strong> (vá InstallServer). Muốn đặt giờ hệ thống phải có quyền WriteDeviceData, và file tự ký chỉ có quyền đó trên máy đã vá.</li>
+            <li><strong>Wi-Fi cho phép NTP</strong> (cổng UDP 123). Wi-Fi ở nhà hầu như đều được.</li>
+          </ul>
+        </div>
+        <div class="card good">
+          <h3>Cần biết</h3>
+          <ul>
+            <li><strong>Cập nhật:</strong> nếu trình cài báo ntpsyncd đang chạy, mở app chọn <i class="vi">Tắt chạy nền</i>, cài xong chọn <i class="vi">Bật chạy nền</i>.</li>
+            <li><strong>Gỡ cài đặt:</strong> chọn Tắt chạy nền trước. File cài đặt <code>C:\Data\ntpsyncd.ini</code> vẫn được giữ lại.</li>
+            <li><strong>Riêng tư:</strong> chỉ liên lạc với các server NTP trong cài đặt. Nhật ký nằm trên máy (tối đa khoảng 128 KB) và không gửi đi đâu.</li>
+            <li><strong>Không tải được trên điện thoại?</strong> GitHub chỉ nhận TLS 1.2, còn trình duyệt gốc của S60 chỉ có TLS 1.0. Cài <a href="https://nnproject.cc/tls/">bản vá TLS</a>, hoặc tải bằng máy tính rồi chép sang.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="build" class="alt" aria-labelledby="build-title">
+  <div class="wrap build">
+    <div>
+      <p class="kicker">Mã nguồn</p>
+      <h2 id="build-title">Tự build từ mã nguồn</h2>
+      <p>Việc build chạy trong một Docker image công khai có sẵn SDK S60 3rd Edition FP2, GnuPoc và GCCE, nên chỉ cần một máy Mac, Linux hoặc Windows (WSL) có Docker.</p>
+      <p>GitHub Actions chạy đúng quy trình build này mỗi lần push. Các file trên trang Releases được build từ đó, từ đúng commit được gắn tag.</p>
+    </div>
+    <pre><code><span class="c"># kiểm thử phần tính toán NTP, bằng trình biên dịch của máy</span>
+<span class="p">$ </span>g++ -std=c++98 -Itest/shim -Iinc \
+    test/test_ntppacket.cpp src/ntppacket.cpp -o t &amp;&amp; ./t
+
+<span class="c"># tạo file cài đặt: sis/ntpsyncd.sisx</span>
+<span class="p">$ </span>bash group/docker-build.sh</code></pre>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="./"><img src="icon.svg" alt="" width="24" height="24">NTP Time Sync</a>
+    <p>Dự án cá nhân của <a href="https://github.com/minhkhoi-dev">Khoi Nguyen</a>. Không liên quan đến Nokia, HMD Global hay NTP Pool Project. <a href="m/">Bản nhẹ cho điện thoại S60</a>.</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

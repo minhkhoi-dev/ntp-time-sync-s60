@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.2//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="vi" lang="vi">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="HandheldFriendly" content="true" />
+<title>NTP Time Sync - Đồng hồ luôn đúng giờ cho Nokia E72</title>
+<link rel="icon" type="image/png" href="icon.png" />
+<!-- The lite page for the phone's own browsers (S60 3rd Edition, Opera Mini): XHTML
+     Mobile Profile, no scripts, no web fonts, nothing loaded but icon.png. The Pages
+     workflow puts the latest release's .sisx next to it and fills in id="dl" and
+     the VERSION comment. Same text as en.html. -->
+<style type="text/css">
+body { margin: 0; padding: 0; background: #ffffff; color: #222222; font-family: sans-serif; }
+a { color: #1a4fb8; }
+.top { background: #1e5fd9; color: #ffffff; padding: 5px 6px; }
+.top img { float: left; margin: 0 6px 0 0; border: 0; }
+.top b { font-size: 1.25em; }
+.top span { display: block; margin-left: 38px; font-size: 0.85em; }
+.clr { clear: both; }
+.dl { margin: 6px; padding: 6px; background: #fff3e3; border: 1px solid #ff8a00; text-align: center; }
+.dl a { font-size: 1.15em; font-weight: bold; color: #1e5fd9; }
+.dl small { display: block; margin-top: 3px; color: #6b5a3a; }
+h2 { margin: 6px 0 0 0; padding: 3px 6px; background: #e8eef8; color: #1a4fb8; font-size: 1em; border-top: 1px solid #d3deef; }
+.s { padding: 4px 6px; }
+ol, ul { margin: 0; padding: 0 0 0 18px; }
+li { margin: 2px 0; }
+.k { font-family: monospace; color: #000000; background: #eeeeee; }
+.foot { margin-top: 8px; padding: 6px; background: #1b2333; color: #c3cbd8; font-size: 0.85em; }
+.foot a { color: #ffffff; }
+</style>
+</head>
+<body>
+
+<div class="top">
+<img src="icon.png" width="32" height="32" alt="" />
+<b>NTP Time Sync</b>
+<span>Đồng hồ Nokia E72 luôn đúng giờ, qua Wi-Fi</span>
+<div class="clr"></div>
+</div>
+
+<div class="dl">
+<a href="https://github.com/minhkhoi-dev/ntp-time-sync-s60/releases/latest" id="dl">Tải NTP Time Sync<!--VERSION--> (.sisx)</a>
+<small>Cần máy đã hack (vá InstallServer).</small>
+</div>
+
+<h2>Cài đặt</h2>
+<div class="s">
+<ol>
+<li>Nếu máy có SIM: tắt <b>Network operator time</b> (Ctrl. panel &gt; Settings &gt; General &gt; Date and time).</li>
+<li>Tải file .sisx ở trên và cài vào bộ nhớ máy (C:).</li>
+<li>Khi máy hiện danh sách điểm truy cập, chọn Wi-Fi của bạn. Máy đồng bộ ngay.</li>
+<li>Mở <b>NTP Time Sync</b> trong Applications để xem trạng thái, hoặc chọn <b>Đồng bộ ngay</b>.</li>
+</ol>
+</div>
+
+<h2>Tính năng</h2>
+<div class="s">
+<ul>
+<li>Chỉ dùng Wi-Fi: không cần SIM, không tốn dữ liệu di động.</li>
+<li>Tự đồng bộ khi bật máy, rồi cứ 6 giờ một lần (chọn được 15 phút tới 1 tuần).</li>
+<li>Hỏi server 3 lần, giữ câu trả lời tốt nhất.</li>
+<li>Lệch dưới 0,5 giây thì để yên. Chỉ đặt giờ UTC, múi giờ giữ nguyên.</li>
+<li>Đồng bộ lại khi thứ khác đổi giờ máy.</li>
+<li>Màn hình tiếng Việt hoặc tiếng Anh.</li>
+</ul>
+</div>
+
+<h2>Cần biết</h2>
+<div class="s">
+<ul>
+<li><b>Cập nhật:</b> nếu trình cài báo ntpsyncd đang chạy, mở app chọn Tắt chạy nền, cài xong chọn Bật chạy nền.</li>
+<li><b>Gỡ cài đặt:</b> chọn Tắt chạy nền trước.</li>
+<li><b>Cài đặt:</b> <span class="k">C:\Data\ntpsyncd.ini</span>, nhật ký: <span class="k">C:\Data\ntpsyncd.log</span>. Nhật ký chỉ nằm trên máy.</li>
+<li><b>Không tải được?</b> Trình duyệt gốc của S60 chỉ có TLS 1.0, GitHub cần TLS 1.2. Cài bản vá TLS (<a href="https://nnproject.cc/tls/">nnproject.cc/tls</a>), hoặc tải file bằng máy tính rồi chép sang điện thoại.</li>
+</ul>
+</div>
+
+<div class="foot">
+<a href="en.html">English</a> | <a href="../?full">Bản đầy đủ</a> | <a href="https://github.com/minhkhoi-dev/ntp-time-sync-s60">GitHub</a><br />
+NTP Time Sync, dự án cá nhân của Khoi Nguyen.
+</div>
+
+</body>
+</html>
