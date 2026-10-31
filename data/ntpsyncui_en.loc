@@ -1,0 +1,83 @@
+// ntpsyncui_en.loc - the texts of the NTP Time Sync app in English (ntpsyncui_en.rsc, the
+// Language setting). UTF-8: ntpsyncui.rss says CHARACTER_SET UTF8. Every text here is also
+// in ntpsyncui_vi.loc, under the same name and with the same %d / %S in the same order.
+
+// Softkeys
+#define qtn_ntp_sk_options          "Options"
+#define qtn_ntp_sk_exit             "Exit"
+#define qtn_ntp_sk_back             "Back"
+#define qtn_ntp_sk_ok               "OK"
+#define qtn_ntp_sk_cancel           "Cancel"
+#define qtn_ntp_sk_yes              "Yes"
+#define qtn_ntp_sk_no               "No"
+#define qtn_ntp_sk_close            "Close"
+
+// The Options menu
+#define qtn_ntp_menu_sync_now       "Sync now"
+#define qtn_ntp_menu_settings       "Settings"
+#define qtn_ntp_menu_log            "View log"
+#define qtn_ntp_menu_start          "Start background sync"
+#define qtn_ntp_menu_stop           "Stop background sync"
+#define qtn_ntp_menu_change         "Change"
+#define qtn_ntp_menu_exit           "Exit"
+
+// The status screen: row titles
+#define qtn_ntp_row_state           "Background sync"
+#define qtn_ntp_row_last            "Last sync"
+#define qtn_ntp_row_attempt         "Last attempt"
+#define qtn_ntp_row_server          "Time from"
+#define qtn_ntp_row_wifi            "Over Wi-Fi"
+#define qtn_ntp_row_next            "Next sync"
+
+// The status screen: values. The first %S is a time ("16:40" or "31/10 16:40").
+#define qtn_ntp_val_running         "Running"
+#define qtn_ntp_val_syncing         "Syncing…"
+#define qtn_ntp_val_stopped         "Stopped"
+#define qtn_ntp_val_none            "None yet"
+#define qtn_ntp_val_corrected       "%S, corrected by %S"
+#define qtn_ntp_val_right           "%S, clock was right (%S)"
+#define qtn_ntp_val_set_failed      "%S, could not set the clock (%d)"
+#define qtn_ntp_val_failed          "%S, error %d"
+#define qtn_ntp_val_no_wifi         "%S, no Wi-Fi"
+#define qtn_ntp_val_cancelled       "%S, no access point picked"
+#define qtn_ntp_val_iap_id          "Access point %u"
+#define qtn_ntp_val_unknown         "Unknown"
+#define qtn_ntp_val_not_scheduled   "Not scheduled"
+
+// Notes and queries
+#define qtn_ntp_query_stop          "Stop background sync? It stays off after a restart until you start it again."
+#define qtn_ntp_note_started        "Background sync started"
+#define qtn_ntp_note_not_running    "ntpsyncd is not running"
+#define qtn_ntp_note_command_failed "Could not send the command (%d)"
+#define qtn_ntp_note_save_failed    "Could not save the settings (%d)"
+#define qtn_ntp_note_start_failed   "Could not start ntpsyncd (%d)"
+#define qtn_ntp_note_no_log         "No log yet"
+#define qtn_ntp_note_no_iaps        "This phone has no Wi-Fi access points"
+#define qtn_ntp_log_title           "Log (newest first)"
+
+// The settings screen
+#define qtn_ntp_settings_title      "Settings"
+#define qtn_ntp_set_iaps            "Wi-Fi access points"
+#define qtn_ntp_set_interval        "Sync interval"
+#define qtn_ntp_set_threshold       "Correction threshold"
+#define qtn_ntp_set_watch           "Watch clock changes"
+#define qtn_ntp_set_servers         "NTP servers"
+#define qtn_ntp_set_language        "Language"
+#define qtn_ntp_set_iaps_none       "None (only Wi-Fi already on)"
+#define qtn_ntp_set_on              "On"
+#define qtn_ntp_set_off             "Off"
+#define qtn_ntp_interval_15m        "15 minutes"
+#define qtn_ntp_interval_30m        "30 minutes"
+#define qtn_ntp_interval_1h         "1 hour"
+#define qtn_ntp_interval_3h         "3 hours"
+#define qtn_ntp_interval_6h         "6 hours"
+#define qtn_ntp_interval_12h        "12 hours"
+#define qtn_ntp_interval_24h        "24 hours"
+#define qtn_ntp_interval_1w         "1 week"
+#define qtn_ntp_threshold_100       "0.1 s"
+#define qtn_ntp_threshold_500       "0.5 s"
+#define qtn_ntp_threshold_1000      "1 s"
+#define qtn_ntp_threshold_2000      "2 s"
+#define qtn_ntp_threshold_5000      "5 s"
+#define qtn_ntp_lang_vi             "Tiếng Việt"
+#define qtn_ntp_lang_en             "English"

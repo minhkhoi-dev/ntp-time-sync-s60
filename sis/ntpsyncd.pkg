@@ -1,0 +1,27 @@
+; ntpsyncd.pkg - S60 3rd Edition (all feature packs, incl. Nokia E72)
+;
+; $(EPOCROOT) in the source paths is substituted by group/build.sh (SDK root, with
+; trailing slash) before makesis runs. Everything goes to C: because the startup
+; entry points at c:\sys\bin\ntpsyncd.exe.
+
+&EN
+
+#{"NTP Time Sync"},(0xE7A15D01),2,0,3,TYPE=SA
+
+%{"ntpsyncd"}
+:"ntpsyncd"
+
+[0x101F7961], 0, 0, 0, {"Series60ProductID"}
+
+; FR,RI starts the daemon as soon as it is installed, so no reboot is needed.
+"$(EPOCROOT)epoc32/release/gcce/urel/ntpsyncd.exe" - "c:\sys\bin\ntpsyncd.exe", FR, RI
+
+; Start at boot (Startup List Management API). The name must be [UID3].rsc.
+"$(EPOCROOT)epoc32/data/z/resource/apps/ntpsyncd_startup.rsc" - "c:\private\101f875a\import\[E7A15D01].rsc"
+
+; The NTP Time Sync app: program, texts (Vietnamese, English), icon, menu registration.
+"$(EPOCROOT)epoc32/release/gcce/urel/ntpsyncui.exe" - "c:\sys\bin\ntpsyncui.exe"
+"$(EPOCROOT)epoc32/data/z/resource/apps/ntpsyncui.rsc" - "c:\resource\apps\ntpsyncui.rsc"
+"$(EPOCROOT)epoc32/data/z/resource/apps/ntpsyncui_en.rsc" - "c:\resource\apps\ntpsyncui_en.rsc"
+"$(EPOCROOT)epoc32/data/z/resource/apps/ntpsyncui_aif.mif" - "c:\resource\apps\ntpsyncui_aif.mif"
+"$(EPOCROOT)epoc32/data/z/private/10003a3f/apps/ntpsyncui_reg.rsc" - "c:\private\10003a3f\import\apps\ntpsyncui_reg.rsc"

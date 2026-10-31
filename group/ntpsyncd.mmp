@@ -1,0 +1,44 @@
+// ntpsyncd - keeps the phone clock in sync with NTP over Wi-Fi.
+// S60 3rd Edition (Symbian 9.1+), written for the Nokia E72 (FP2).
+
+TARGET          ntpsyncd.exe
+TARGETTYPE      exe
+UID             0x100039CE 0xE7A15D01
+SECUREID        0xE7A15D01
+VENDORID        0
+
+// WriteDeviceData: User::SetUTCTime. ReadDeviceData: reading the access
+// point table. Neither is user-grantable, so the self-signed SIS needs a
+// phone with the InstallServer patch (yours has it).
+CAPABILITY      NetworkServices ReadDeviceData WriteDeviceData
+
+EPOCSTACKSIZE   0x5000
+EPOCHEAPSIZE    0x1000 0x100000
+
+USERINCLUDE     ../inc
+SYSTEMINCLUDE   /epoc32/include
+
+SOURCEPATH      ../src
+SOURCE          main.cpp
+SOURCE          daemon.cpp
+SOURCE          syncsession.cpp
+SOURCE          ntppacket.cpp
+SOURCE          config.cpp
+SOURCE          logger.cpp
+SOURCE          propwatcher.cpp
+
+SOURCEPATH      ../data
+// Startup list entry. The .pkg installs it as c:\private\101f875a\import\[E7A15D01].rsc
+START RESOURCE  ntpsyncd_startup.rss
+TARGETPATH      /resource/apps
+END
+
+LIBRARY         euser.lib
+LIBRARY         efsrv.lib
+LIBRARY         esock.lib
+LIBRARY         insock.lib
+LIBRARY         commdb.lib
+LIBRARY         bafl.lib
+LIBRARY         hal.lib
+LIBRARY         charconv.lib
+LIBRARY         aknnotify.lib

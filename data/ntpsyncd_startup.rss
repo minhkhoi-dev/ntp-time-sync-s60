@@ -1,0 +1,11 @@
+/*
+ * Startup List Management API entry: start ntpsyncd at boot.
+ * Installed as c:\private\101f875a\import\[E7A15D01].rsc (file name = UID3).
+ */
+#include <startupitem.rh>
+
+RESOURCE STARTUP_ITEM_INFO ntpsyncd
+	{
+	executable_name = "c:\\sys\\bin\\ntpsyncd.exe";
+	recovery = EStartupItemExPolicyNone;
+	}

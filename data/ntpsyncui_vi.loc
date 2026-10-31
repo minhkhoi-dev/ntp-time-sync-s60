@@ -1,0 +1,83 @@
+// ntpsyncui_vi.loc - the texts of the NTP Time Sync app in Vietnamese (ntpsyncui.rsc, the default).
+// UTF-8: ntpsyncui.rss says CHARACTER_SET UTF8. Every text here is also in
+// ntpsyncui_en.loc, under the same name and with the same %d / %S in the same order.
+
+// Softkeys
+#define qtn_ntp_sk_options          "Tùy chọn"
+#define qtn_ntp_sk_exit             "Thoát"
+#define qtn_ntp_sk_back             "Quay lại"
+#define qtn_ntp_sk_ok               "OK"
+#define qtn_ntp_sk_cancel           "Hủy"
+#define qtn_ntp_sk_yes              "Có"
+#define qtn_ntp_sk_no               "Không"
+#define qtn_ntp_sk_close            "Đóng"
+
+// The Options menu
+#define qtn_ntp_menu_sync_now       "Đồng bộ ngay"
+#define qtn_ntp_menu_settings       "Cài đặt"
+#define qtn_ntp_menu_log            "Xem log"
+#define qtn_ntp_menu_start          "Bật chạy nền"
+#define qtn_ntp_menu_stop           "Tắt chạy nền"
+#define qtn_ntp_menu_change         "Thay đổi"
+#define qtn_ntp_menu_exit           "Thoát"
+
+// The status screen: row titles
+#define qtn_ntp_row_state           "Chạy nền"
+#define qtn_ntp_row_last            "Lần đồng bộ cuối"
+#define qtn_ntp_row_attempt         "Lần thử gần nhất"
+#define qtn_ntp_row_server          "Lấy giờ từ"
+#define qtn_ntp_row_wifi            "Qua Wi-Fi"
+#define qtn_ntp_row_next            "Lần đồng bộ tới"
+
+// The status screen: values. The first %S is a time ("16:40" or "31/10 16:40").
+#define qtn_ntp_val_running         "Đang chạy"
+#define qtn_ntp_val_syncing         "Đang đồng bộ…"
+#define qtn_ntp_val_stopped         "Đã tắt"
+#define qtn_ntp_val_none            "Chưa có"
+#define qtn_ntp_val_corrected       "%S, đã chỉnh %S"
+#define qtn_ntp_val_right           "%S, giờ đã đúng (%S)"
+#define qtn_ntp_val_set_failed      "%S, không đặt được giờ (%d)"
+#define qtn_ntp_val_failed          "%S, lỗi %d"
+#define qtn_ntp_val_no_wifi         "%S, không có Wi-Fi"
+#define qtn_ntp_val_cancelled       "%S, chưa chọn điểm truy cập"
+#define qtn_ntp_val_iap_id          "Điểm truy cập %u"
+#define qtn_ntp_val_unknown         "Không rõ"
+#define qtn_ntp_val_not_scheduled   "Chưa hẹn"
+
+// Notes and queries
+#define qtn_ntp_query_stop          "Tắt đồng bộ chạy nền? Khởi động lại máy nó cũng không tự chạy, cho tới khi bạn bật lại."
+#define qtn_ntp_note_started        "Đã bật chạy nền"
+#define qtn_ntp_note_not_running    "ntpsyncd không chạy"
+#define qtn_ntp_note_command_failed "Không gửi được lệnh (%d)"
+#define qtn_ntp_note_save_failed    "Không lưu được cài đặt (%d)"
+#define qtn_ntp_note_start_failed   "Không chạy được ntpsyncd (%d)"
+#define qtn_ntp_note_no_log         "Chưa có log"
+#define qtn_ntp_note_no_iaps        "Máy chưa có điểm truy cập Wi-Fi nào"
+#define qtn_ntp_log_title           "Log (mới nhất ở trên)"
+
+// The settings screen
+#define qtn_ntp_settings_title      "Cài đặt"
+#define qtn_ntp_set_iaps            "Điểm truy cập Wi-Fi"
+#define qtn_ntp_set_interval        "Chu kỳ đồng bộ"
+#define qtn_ntp_set_threshold       "Ngưỡng chỉnh giờ"
+#define qtn_ntp_set_watch           "Theo dõi đổi giờ"
+#define qtn_ntp_set_servers         "Server NTP"
+#define qtn_ntp_set_language        "Ngôn ngữ"
+#define qtn_ntp_set_iaps_none       "Không có (chỉ dùng Wi-Fi đang bật)"
+#define qtn_ntp_set_on              "Bật"
+#define qtn_ntp_set_off             "Tắt"
+#define qtn_ntp_interval_15m        "15 phút"
+#define qtn_ntp_interval_30m        "30 phút"
+#define qtn_ntp_interval_1h         "1 giờ"
+#define qtn_ntp_interval_3h         "3 giờ"
+#define qtn_ntp_interval_6h         "6 giờ"
+#define qtn_ntp_interval_12h        "12 giờ"
+#define qtn_ntp_interval_24h        "24 giờ"
+#define qtn_ntp_interval_1w         "1 tuần"
+#define qtn_ntp_threshold_100       "0,1 giây"
+#define qtn_ntp_threshold_500       "0,5 giây"
+#define qtn_ntp_threshold_1000      "1 giây"
+#define qtn_ntp_threshold_2000      "2 giây"
+#define qtn_ntp_threshold_5000      "5 giây"
+#define qtn_ntp_lang_vi             "Tiếng Việt"
+#define qtn_ntp_lang_en             "English"

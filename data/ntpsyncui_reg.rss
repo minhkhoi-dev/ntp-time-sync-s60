@@ -1,0 +1,16 @@
+/*
+ * ntpsyncui_reg.rss - registers the NTP Time Sync app in the application menu.
+ */
+#include <appinfo.rh>
+#include <ntpsyncui.rsg>
+#include "ntpsyncd.hrh"
+
+UID2 KUidAppRegistrationResourceFile
+UID3 KNtpSyncUiUid3
+
+RESOURCE APP_REGISTRATION_INFO
+	{
+	app_file = "ntpsyncui";
+	localisable_resource_file = "\\resource\\apps\\ntpsyncui";
+	localisable_resource_id = R_NTPSYNCUI_LOCALISABLE_APP_INFO;
+	}

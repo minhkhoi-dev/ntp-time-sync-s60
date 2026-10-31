@@ -1,0 +1,28 @@
+/*
+ * ntpsyncui.hrh - command ids of the NTP Time Sync app, shared by code and resources.
+ */
+#ifndef NTPSYNCUI_HRH
+#define NTPSYNCUI_HRH
+
+enum TNtpUiCommand
+	{
+	ENtpUiCmdSyncNow = 0x6000,
+	ENtpUiCmdLog,
+	ENtpUiCmdStop,
+	ENtpUiCmdStart,
+	ENtpUiCmdSettings,
+	ENtpUiCmdChange
+	};
+
+/** The rows of the settings screen, in order; also the identifiers in the resource. */
+enum TNtpSettingId
+	{
+	ENtpSetIaps = 1,
+	ENtpSetInterval,
+	ENtpSetThreshold,
+	ENtpSetWatch,
+	ENtpSetServers,
+	ENtpSetLanguage
+	};
+
+#endif // NTPSYNCUI_HRH

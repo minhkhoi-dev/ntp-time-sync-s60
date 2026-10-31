@@ -1,0 +1,434 @@
+/*
+ * ntpsyncui.rss - the NTP Time Sync app's resources: the menu, the softkeys, the queries
+ * and every text on the screen.
+ *
+ * Built twice: as ntpsyncui.rsc with the Vietnamese texts of ntpsyncui_vi.loc (the
+ * default), and from ntpsyncui_en.rss, which defines NTPSYNCUI_LANG_EN and includes this
+ * file, as ntpsyncui_en.rsc with those of ntpsyncui_en.loc. Same NAME and same resources
+ * in the same order, so the same IDs; the app swaps one file for the other at run time.
+ */
+NAME NTPU
+CHARACTER_SET UTF8
+
+#include <eikon.rh>
+#include <avkon.rh>
+#include <avkon.rsg>
+#include <appinfo.rh>
+#include "ntpsyncui.hrh"
+
+#ifdef NTPSYNCUI_LANG_EN
+#include "ntpsyncui_en.loc"
+#else
+#include "ntpsyncui_vi.loc"
+#endif
+
+// The first three stay first: the framework reads EIK_APP_INFO as the third resource.
+RESOURCE RSS_SIGNATURE { }
+
+RESOURCE TBUF r_default_document_name { buf = ""; }
+
+RESOURCE EIK_APP_INFO
+	{
+	menubar = r_ntp_menubar;
+	cba = r_ntp_softkeys_options_exit;
+	}
+
+// Own softkeys, in the language of the texts (Avkon's would be in the phone's).
+// The command ids are Avkon's, so they act as Avkon's softkeys do.
+RESOURCE CBA r_ntp_softkeys_options_exit
+	{
+	buttons =
+		{
+		CBA_BUTTON { id = EAknSoftkeyOptions; txt = qtn_ntp_sk_options; },
+		CBA_BUTTON { id = EAknSoftkeyExit;    txt = qtn_ntp_sk_exit; }
+		};
+	}
+
+RESOURCE CBA r_ntp_softkeys_options_back
+	{
+	buttons =
+		{
+		CBA_BUTTON { id = EAknSoftkeyOptions; txt = qtn_ntp_sk_options; },
+		CBA_BUTTON { id = EAknSoftkeyBack;    txt = qtn_ntp_sk_back; }
+		};
+	}
+
+RESOURCE CBA r_ntp_softkeys_ok_cancel
+	{
+	buttons =
+		{
+		CBA_BUTTON { id = EAknSoftkeyOk;     txt = qtn_ntp_sk_ok; },
+		CBA_BUTTON { id = EAknSoftkeyCancel; txt = qtn_ntp_sk_cancel; }
+		};
+	}
+
+RESOURCE CBA r_ntp_softkeys_yes_no
+	{
+	buttons =
+		{
+		CBA_BUTTON { id = EAknSoftkeyYes; txt = qtn_ntp_sk_yes; },
+		CBA_BUTTON { id = EAknSoftkeyNo;  txt = qtn_ntp_sk_no; }
+		};
+	}
+
+RESOURCE CBA r_ntp_softkeys_close
+	{
+	buttons =
+		{
+		CBA_BUTTON { id = EAknSoftkeyEmpty; txt = ""; },
+		CBA_BUTTON { id = EAknSoftkeyClose; txt = qtn_ntp_sk_close; }
+		};
+	}
+
+RESOURCE MENU_BAR r_ntp_menubar
+	{
+	titles = { MENU_TITLE { menu_pane = r_ntp_menu; } };
+	}
+
+// One menu for both screens: CNtpUiAppUi::DynInitMenuPaneL hides the items that do not
+// apply to the one in front.
+RESOURCE MENU_PANE r_ntp_menu
+	{
+	items =
+		{
+		MENU_ITEM { command = ENtpUiCmdChange;   txt = qtn_ntp_menu_change; },
+		MENU_ITEM { command = ENtpUiCmdSyncNow;  txt = qtn_ntp_menu_sync_now; },
+		MENU_ITEM { command = ENtpUiCmdSettings; txt = qtn_ntp_menu_settings; },
+		MENU_ITEM { command = ENtpUiCmdLog;      txt = qtn_ntp_menu_log; },
+		MENU_ITEM { command = ENtpUiCmdStop;    txt = qtn_ntp_menu_stop; },
+		MENU_ITEM { command = ENtpUiCmdStart;   txt = qtn_ntp_menu_start; },
+		MENU_ITEM { command = EAknSoftkeyExit;  txt = qtn_ntp_menu_exit; }
+		};
+	}
+
+// Stop background sync: Yes / No.
+RESOURCE DIALOG r_ntp_stop_query
+	{
+	flags = EGeneralQueryFlags;
+	buttons = r_ntp_softkeys_yes_no;
+	items =
+		{
+		DLG_LINE
+			{
+			type = EAknCtQuery;
+			id = EGeneralQuery;
+			control = AVKON_CONFIRMATION_QUERY
+				{
+				layout = EConfirmationQueryLayout;
+				label = qtn_ntp_query_stop;
+				};
+			}
+		};
+	}
+
+// The log: a heading (set in the code from r_ntp_str_log_title) and the text.
+RESOURCE DIALOG r_ntp_log_query
+	{
+	flags = EGeneralQueryFlags | EEikDialogFlagNoBorder | EEikDialogFlagNoShadow;
+	buttons = r_ntp_softkeys_close;
+	items =
+		{
+		DLG_LINE
+			{
+			type = EAknCtPopupHeadingPane;
+			id = EAknMessageQueryHeaderId;
+			control = AVKON_HEADING
+				{
+				label = "";
+				headinglayout = R_AVKON_LIST_HEADING_PANE;
+				};
+			},
+		DLG_LINE
+			{
+			type = EAknCtMessageQuery;
+			id = EAknMessageQueryContentId;
+			control = AVKON_MESSAGE_QUERY
+				{
+				};
+			}
+		};
+	}
+
+// The texts of the status screen and the notes; %d and %S are filled in by the code.
+RESOURCE TBUF r_ntp_str_row_state         { buf = qtn_ntp_row_state; }
+RESOURCE TBUF r_ntp_str_row_last          { buf = qtn_ntp_row_last; }
+RESOURCE TBUF r_ntp_str_row_attempt       { buf = qtn_ntp_row_attempt; }
+RESOURCE TBUF r_ntp_str_row_server        { buf = qtn_ntp_row_server; }
+RESOURCE TBUF r_ntp_str_row_wifi          { buf = qtn_ntp_row_wifi; }
+RESOURCE TBUF r_ntp_str_row_next          { buf = qtn_ntp_row_next; }
+RESOURCE TBUF r_ntp_str_val_running       { buf = qtn_ntp_val_running; }
+RESOURCE TBUF r_ntp_str_val_syncing       { buf = qtn_ntp_val_syncing; }
+RESOURCE TBUF r_ntp_str_val_stopped       { buf = qtn_ntp_val_stopped; }
+RESOURCE TBUF r_ntp_str_val_none          { buf = qtn_ntp_val_none; }
+RESOURCE TBUF r_ntp_str_val_corrected     { buf = qtn_ntp_val_corrected; }
+RESOURCE TBUF r_ntp_str_val_right         { buf = qtn_ntp_val_right; }
+RESOURCE TBUF r_ntp_str_val_set_failed    { buf = qtn_ntp_val_set_failed; }
+RESOURCE TBUF r_ntp_str_val_failed        { buf = qtn_ntp_val_failed; }
+RESOURCE TBUF r_ntp_str_val_no_wifi       { buf = qtn_ntp_val_no_wifi; }
+RESOURCE TBUF r_ntp_str_val_cancelled     { buf = qtn_ntp_val_cancelled; }
+RESOURCE TBUF r_ntp_str_val_iap_id        { buf = qtn_ntp_val_iap_id; }
+RESOURCE TBUF r_ntp_str_val_unknown       { buf = qtn_ntp_val_unknown; }
+RESOURCE TBUF r_ntp_str_val_not_scheduled { buf = qtn_ntp_val_not_scheduled; }
+RESOURCE TBUF r_ntp_str_note_started      { buf = qtn_ntp_note_started; }
+RESOURCE TBUF r_ntp_str_note_command_failed { buf = qtn_ntp_note_command_failed; }
+RESOURCE TBUF r_ntp_str_note_save_failed  { buf = qtn_ntp_note_save_failed; }
+RESOURCE TBUF r_ntp_str_note_start_failed { buf = qtn_ntp_note_start_failed; }
+RESOURCE TBUF r_ntp_str_note_no_log       { buf = qtn_ntp_note_no_log; }
+RESOURCE TBUF r_ntp_str_log_title         { buf = qtn_ntp_log_title; }
+RESOURCE TBUF r_ntp_str_note_no_iaps      { buf = qtn_ntp_note_no_iaps; }
+RESOURCE TBUF r_ntp_str_settings_title    { buf = qtn_ntp_settings_title; }
+RESOURCE TBUF r_ntp_str_set_iaps_none     { buf = qtn_ntp_set_iaps_none; }
+
+// The app's name for the title pane: the same in both languages.
+RESOURCE TBUF r_ntp_str_title             { buf = "NTP Time Sync"; }
+
+// ---------------------------------------------------------------------------
+// The settings screen (CNtpSettingList), the rows in the order of TNtpSettingId.
+
+RESOURCE AVKON_SETTING_ITEM_LIST r_ntp_setting_list
+	{
+	title = qtn_ntp_settings_title;
+	items =
+		{
+		// edited on a page the code opens (the Wi-Fi access points); the page here is not used
+		AVKON_SETTING_ITEM
+			{
+			identifier = ENtpSetIaps;
+			name = qtn_ntp_set_iaps;
+			setting_page_resource = r_ntp_text_page;
+			},
+		AVKON_SETTING_ITEM
+			{
+			identifier = ENtpSetInterval;
+			name = qtn_ntp_set_interval;
+			setting_page_resource = r_ntp_popup_page;
+			associated_resource = r_ntp_interval_texts;
+			},
+		AVKON_SETTING_ITEM
+			{
+			identifier = ENtpSetThreshold;
+			name = qtn_ntp_set_threshold;
+			setting_page_resource = r_ntp_popup_page;
+			associated_resource = r_ntp_threshold_texts;
+			},
+		AVKON_SETTING_ITEM
+			{
+			identifier = ENtpSetWatch;
+			name = qtn_ntp_set_watch;
+			setting_page_resource = r_ntp_popup_page;
+			associated_resource = r_ntp_onoff_texts;
+			},
+		AVKON_SETTING_ITEM
+			{
+			identifier = ENtpSetServers;
+			name = qtn_ntp_set_servers;
+			setting_page_resource = r_ntp_servers_page;
+			},
+		AVKON_SETTING_ITEM
+			{
+			identifier = ENtpSetLanguage;
+			name = qtn_ntp_set_language;
+			setting_page_resource = r_ntp_popup_page;
+			associated_resource = r_ntp_language_texts;
+			}
+		};
+	}
+
+// The page of a row with a few values (the row's name is its title).
+RESOURCE AVKON_SETTING_PAGE r_ntp_popup_page
+	{
+	label = "";
+	softkey_resource = r_ntp_softkeys_ok_cancel;
+	type = EAknCtPopupSettingList;
+	editor_resource_id = r_ntp_popup_list;
+	}
+
+RESOURCE POPUP_SETTING_LIST r_ntp_popup_list
+	{
+	flags = 0;
+	}
+
+// A one line text page (only the access points row names it, and it is not opened).
+RESOURCE AVKON_SETTING_PAGE r_ntp_text_page
+	{
+	label = "";
+	softkey_resource = r_ntp_softkeys_ok_cancel;
+	type = EEikCtEdwin;
+	editor_resource_id = r_ntp_text_edwin;
+	}
+
+RESOURCE EDWIN r_ntp_text_edwin
+	{
+	flags = EEikEdwinNoLineOrParaBreaks;
+	width = 16;
+	lines = 1;
+	maxlength = 255;
+	default_case = EAknEditorLowerCase;
+	avkon_flags = EAknEditorFlagNoT9 | EAknEditorFlagLatinInputModesOnly;
+	}
+
+// The servers' page: one host name per line, no predictive text. It can be left empty
+// (the daemon then uses its own servers).
+RESOURCE AVKON_SETTING_PAGE r_ntp_servers_page
+	{
+	label = "";
+	softkey_resource = r_ntp_softkeys_ok_cancel;
+	type = EEikCtEdwin;
+	editor_resource_id = r_ntp_servers_edwin;
+	}
+
+RESOURCE EDWIN r_ntp_servers_edwin
+	{
+	flags = 0;
+	width = 16;
+	lines = 5;
+	maxlength = 255;
+	default_case = EAknEditorLowerCase;
+	avkon_flags = EAknEditorFlagNoT9 | EAknEditorFlagLatinInputModesOnly;
+	}
+
+// The page of the Wi-Fi access points: a list with a check box on each (the items are
+// made in the code).
+RESOURCE AVKON_SETTING_PAGE r_ntp_iaps_page
+	{
+	label = qtn_ntp_set_iaps;
+	softkey_resource = r_ntp_softkeys_ok_cancel;
+	type = EAknSetListBox;
+	editor_resource_id = r_ntp_iaps_listbox;
+	}
+
+RESOURCE LISTBOX r_ntp_iaps_listbox
+	{
+	flags = EAknListBoxMultiselectionList;
+	}
+
+// Sync interval: the value is the index (0..7), the minutes are in ntpsettinglist.cpp.
+RESOURCE AVKON_POPUP_SETTING_TEXTS r_ntp_interval_texts
+	{
+	setting_texts_resource = r_ntp_interval_values;
+	popped_up_texts_resource = r_ntp_interval_popped;
+	}
+
+RESOURCE ARRAY r_ntp_interval_values
+	{
+	items =
+		{
+		AVKON_ENUMERATED_TEXT { value = 0; text = qtn_ntp_interval_15m; },
+		AVKON_ENUMERATED_TEXT { value = 1; text = qtn_ntp_interval_30m; },
+		AVKON_ENUMERATED_TEXT { value = 2; text = qtn_ntp_interval_1h; },
+		AVKON_ENUMERATED_TEXT { value = 3; text = qtn_ntp_interval_3h; },
+		AVKON_ENUMERATED_TEXT { value = 4; text = qtn_ntp_interval_6h; },
+		AVKON_ENUMERATED_TEXT { value = 5; text = qtn_ntp_interval_12h; },
+		AVKON_ENUMERATED_TEXT { value = 6; text = qtn_ntp_interval_24h; },
+		AVKON_ENUMERATED_TEXT { value = 7; text = qtn_ntp_interval_1w; }
+		};
+	}
+
+RESOURCE ARRAY r_ntp_interval_popped
+	{
+	items =
+		{
+		LBUF { txt = qtn_ntp_interval_15m; },
+		LBUF { txt = qtn_ntp_interval_30m; },
+		LBUF { txt = qtn_ntp_interval_1h; },
+		LBUF { txt = qtn_ntp_interval_3h; },
+		LBUF { txt = qtn_ntp_interval_6h; },
+		LBUF { txt = qtn_ntp_interval_12h; },
+		LBUF { txt = qtn_ntp_interval_24h; },
+		LBUF { txt = qtn_ntp_interval_1w; }
+		};
+	}
+
+// Correction threshold: the value is the index (0..4).
+RESOURCE AVKON_POPUP_SETTING_TEXTS r_ntp_threshold_texts
+	{
+	setting_texts_resource = r_ntp_threshold_values;
+	popped_up_texts_resource = r_ntp_threshold_popped;
+	}
+
+RESOURCE ARRAY r_ntp_threshold_values
+	{
+	items =
+		{
+		AVKON_ENUMERATED_TEXT { value = 0; text = qtn_ntp_threshold_100; },
+		AVKON_ENUMERATED_TEXT { value = 1; text = qtn_ntp_threshold_500; },
+		AVKON_ENUMERATED_TEXT { value = 2; text = qtn_ntp_threshold_1000; },
+		AVKON_ENUMERATED_TEXT { value = 3; text = qtn_ntp_threshold_2000; },
+		AVKON_ENUMERATED_TEXT { value = 4; text = qtn_ntp_threshold_5000; }
+		};
+	}
+
+RESOURCE ARRAY r_ntp_threshold_popped
+	{
+	items =
+		{
+		LBUF { txt = qtn_ntp_threshold_100; },
+		LBUF { txt = qtn_ntp_threshold_500; },
+		LBUF { txt = qtn_ntp_threshold_1000; },
+		LBUF { txt = qtn_ntp_threshold_2000; },
+		LBUF { txt = qtn_ntp_threshold_5000; }
+		};
+	}
+
+// On / Off (CAknBinaryPopupSettingItem: the values 1 and 0).
+RESOURCE AVKON_POPUP_SETTING_TEXTS r_ntp_onoff_texts
+	{
+	setting_texts_resource = r_ntp_onoff_values;
+	popped_up_texts_resource = r_ntp_onoff_popped;
+	}
+
+RESOURCE ARRAY r_ntp_onoff_values
+	{
+	items =
+		{
+		AVKON_ENUMERATED_TEXT { value = 1; text = qtn_ntp_set_on; },
+		AVKON_ENUMERATED_TEXT { value = 0; text = qtn_ntp_set_off; }
+		};
+	}
+
+RESOURCE ARRAY r_ntp_onoff_popped
+	{
+	items =
+		{
+		LBUF { txt = qtn_ntp_set_on; },
+		LBUF { txt = qtn_ntp_set_off; }
+		};
+	}
+
+// The language of the app's screens (TNtpUiLanguage).
+RESOURCE AVKON_POPUP_SETTING_TEXTS r_ntp_language_texts
+	{
+	setting_texts_resource = r_ntp_language_values;
+	popped_up_texts_resource = r_ntp_language_popped;
+	}
+
+RESOURCE ARRAY r_ntp_language_values
+	{
+	items =
+		{
+		AVKON_ENUMERATED_TEXT { value = 0; text = qtn_ntp_lang_vi; },
+		AVKON_ENUMERATED_TEXT { value = 1; text = qtn_ntp_lang_en; }
+		};
+	}
+
+RESOURCE ARRAY r_ntp_language_popped
+	{
+	items =
+		{
+		LBUF { txt = qtn_ntp_lang_vi; },
+		LBUF { txt = qtn_ntp_lang_en; }
+		};
+	}
+
+// The caption and the icon in the phone's menu: gfx/ntpsyncui.svg, made into
+// ntpsyncui_aif.mif by group/build.sh.
+RESOURCE LOCALISABLE_APP_INFO r_ntpsyncui_localisable_app_info
+	{
+	short_caption = "NTP Time Sync";
+	caption_and_icon = CAPTION_AND_ICON_INFO
+		{
+		caption = "NTP Time Sync";
+		number_of_icons = 1;
+		icon_file = "\\resource\\apps\\ntpsyncui_aif.mif";
+		};
+	}

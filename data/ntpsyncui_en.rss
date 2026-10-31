@@ -1,0 +1,7 @@
+/*
+ * ntpsyncui_en.rss - the NTP Time Sync app's resources with the English texts
+ * (ntpsyncui_en.rsc): ntpsyncui.rss with ntpsyncui_en.loc in place of
+ * ntpsyncui_vi.loc. Same NAME, same IDs (ntpsyncui.rsg).
+ */
+#define NTPSYNCUI_LANG_EN
+#include "ntpsyncui.rss"

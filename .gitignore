@@ -1,0 +1,14 @@
+# Symbian build output
+group/ABLD.BAT
+group/abld.bat
+sis/*.sis
+sis/*.sisx
+sis/build.pkg
+# signing keys - never commit
+sis/dev.key
+sis/dev.cer
+# logs copied off the phone
+*.log
+logs/
+# macOS
+.DS_Store

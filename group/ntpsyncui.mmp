@@ -1,0 +1,51 @@
+// ntpsyncui - the NTP Time Sync app: shows what ntpsyncd is doing and sends it commands.
+// Avkon, S60 3rd Edition FP2 (Nokia E72).
+
+TARGET          ntpsyncui.exe
+TARGETTYPE      exe
+UID             0x100039CE 0xE7A15D02
+SECUREID        0xE7A15D02
+VENDORID        0
+
+// ReadDeviceData: config.cpp reads the access point table.
+CAPABILITY      ReadDeviceData
+
+EPOCSTACKSIZE   0x5000
+EPOCHEAPSIZE    0x10000 0x200000
+
+USERINCLUDE     ../inc
+SYSTEMINCLUDE   /epoc32/include
+
+SOURCEPATH      ../src/ui
+SOURCE          ntpsyncui.cpp
+SOURCE          ntpuiapplication.cpp
+SOURCE          ntpuidocument.cpp
+SOURCE          ntpuiappui.cpp
+SOURCE          ntpstatusview.cpp
+SOURCE          ntpuisettings.cpp
+SOURCE          ntpsettinglist.cpp
+
+SOURCEPATH      ../src
+SOURCE          config.cpp
+SOURCE          logger.cpp
+SOURCE          propwatcher.cpp
+
+SOURCEPATH      ../data
+START RESOURCE  ntpsyncui.rss
+HEADER
+TARGETPATH      /resource/apps
+END
+
+// The same resources with the English texts: ntpsyncui_en.rsc, same IDs as ntpsyncui.rsg.
+// (The icon, ntpsyncui_aif.mif, is made by build.sh with mifconv.)
+START RESOURCE  ntpsyncui_en.rss
+TARGETPATH      /resource/apps
+END
+
+START RESOURCE  ntpsyncui_reg.rss
+TARGETPATH      /private/10003a3f/apps
+END
+
+LIBRARY         euser.lib apparc.lib cone.lib eikcore.lib eikcoctl.lib eikctl.lib
+LIBRARY         eikdlg.lib avkon.lib bafl.lib gdi.lib efsrv.lib charconv.lib
+LIBRARY         commdb.lib

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" baseProfile="tiny" width="88" height="88" viewBox="0 0 88 88">
+<defs>
+<linearGradient id="tile" gradientUnits="userSpaceOnUse" x1="0" y1="2" x2="0" y2="86"><stop offset="0" stop-color="#4FA3FF"/><stop offset="1" stop-color="#1E5FD9"/></linearGradient>
+<linearGradient id="face" gradientUnits="userSpaceOnUse" x1="0" y1="23" x2="0" y2="65"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E4ECF8"/></linearGradient>
+</defs>
+<rect x="2" y="2" width="84" height="84" rx="20" ry="20" fill="url(#tile)"/>
+<path d="M15.81 33.74 C20.12 21.89 31.39 14 44 14 C56.61 14 67.88 21.89 72.19 33.74" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round"/>
+<path d="M64.67 36.48 L79.71 31 L75.61 43.14 Z" fill="#FFFFFF"/>
+<path d="M72.19 54.26 C67.88 66.11 56.61 74 44 74 C31.39 74 20.12 66.11 15.81 54.26" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round"/>
+<path d="M23.33 51.52 L8.29 57 L12.39 44.86 Z" fill="#FFFFFF"/>
+<circle cx="44" cy="44" r="21" fill="url(#face)"/>
+<rect x="42.5" y="26" width="3" height="5" fill="#1A4FB8"/>
+<rect x="42.5" y="57" width="3" height="5" fill="#1A4FB8"/>
+<rect x="57" y="42.5" width="5" height="3" fill="#1A4FB8"/>
+<rect x="26" y="42.5" width="5" height="3" fill="#1A4FB8"/>
+<path d="M44 44 L35.34 39" fill="none" stroke="#1A4FB8" stroke-width="5" stroke-linecap="round"/>
+<path d="M44 44 L56.99 36.5" fill="none" stroke="#1A4FB8" stroke-width="3.5" stroke-linecap="round"/>
+<circle cx="44" cy="44" r="3.2" fill="#FF8A00"/>
+</svg>

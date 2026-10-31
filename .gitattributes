@@ -1,0 +1,10 @@
+# LF everywhere: a CRLF checkout breaks group/build.sh ("set -o pipefail\r")
+* text=auto eol=lf
+# meant for the phone
+*.ini text eol=crlf
+*.png binary
+*.sis binary
+*.sisx binary
+*.mif binary
+*.key binary
+*.cer binary

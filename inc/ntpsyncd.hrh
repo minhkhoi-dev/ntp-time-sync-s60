@@ -1,0 +1,25 @@
+/*
+ * ntpsyncd.hrh - identifiers shared by code and resources.
+ *
+ * 0xE... UIDs are the unprotected range for self-signed packages.
+ * If you change it, also change the .mmp, the .pkg and the startup
+ * resource file name ([E7A15D01].rsc in the .pkg).
+ */
+#ifndef NTPSYNCD_HRH
+#define NTPSYNCD_HRH
+
+#define KNtpSyncdUid3 0xE7A15D01
+
+/** Publish & Subscribe key: a second launch sets this to ask for a sync now. */
+#define KNtpSyncdSyncNowKey 1
+
+/** The NTP Time Sync app; it may send commands to the daemon. */
+#define KNtpSyncUiUid3 0xE7A15D02
+
+/** Publish & Subscribe key: TNtpStatus, written by the daemon. */
+#define KNtpSyncdStatusKey 2
+
+/** Publish & Subscribe key: TNtpCommand from the app. */
+#define KNtpSyncdCommandKey 3
+
+#endif // NTPSYNCD_HRH
