@@ -1,0 +1,118 @@
+# Runs the NTP packet unit tests on the host, then builds ntpsyncd.sisx (the daemon and
+# the UI app) in the public SDK image, as group/docker-build.sh does in WSL. The package
+# is kept as the run's artifact; a tag v<version> also makes a GitHub release with it,
+# which the page (site/) links to. The version is the one in sis/ntpsyncd.pkg and must
+# match KVersion in src/daemon.cpp.
+#
+# Signing: with the secrets NTPSYNCD_DEV_KEY and NTPSYNCD_DEV_CER (the contents of
+# sis/dev.key and dev.cer) the package is signed with the same key as the local builds;
+# without them each run makes a throwaway key, which the hacked E72 takes as well.
+name: Build
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+    paths:
+      - 'src/**'
+      - 'inc/**'
+      - 'data/**'
+      - 'group/**'
+      - 'gfx/**'
+      - 'sis/ntpsyncd.pkg'
+      - 'test/**'
+      - '.github/workflows/build.yml'
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'inc/**'
+      - 'data/**'
+      - 'group/**'
+      - 'gfx/**'
+      - 'sis/ntpsyncd.pkg'
+      - 'test/**'
+      - '.github/workflows/build.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: NTP packet tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - run: g++ -std=c++98 -Wall -Wextra -Itest/shim -Iinc test/test_ntppacket.cpp src/ntppacket.cpp -o /tmp/t && /tmp/t
+
+  package:
+    name: Package (.sisx)
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # for the release, on a tag only
+      actions: write # to run pages.yml after the release
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Signing key
+        env:
+          DEV_KEY: ${{ secrets.NTPSYNCD_DEV_KEY }}
+          DEV_CER: ${{ secrets.NTPSYNCD_DEV_CER }}
+        run: |
+          if [ -n "$DEV_KEY" ] && [ -n "$DEV_CER" ]; then
+            printf '%s\n' "$DEV_KEY" > sis/dev.key
+            printf '%s\n' "$DEV_CER" > sis/dev.cer
+            echo "Signed with the key from the repository's secrets"
+          else
+            echo "::notice::No NTPSYNCD_DEV_KEY / NTPSYNCD_DEV_CER secrets: signed with a throwaway key"
+          fi
+
+      - name: Version
+        id: ver
+        run: |
+          version="$(sed -n '/^#{/s/^#{"[^"]*"},([^)]*),\([0-9]*\),\([0-9]*\),\([0-9]*\).*/\1.\2.\3/p' sis/ntpsyncd.pkg | tr -d '\r\n')"
+          if [ -z "$version" ]; then
+            echo "::error::Cannot read the version from the header line of sis/ntpsyncd.pkg"
+            exit 1
+          fi
+          code="$(sed -n 's/.*_LIT(KVersion, "\([^"]*\)").*/\1/p' src/daemon.cpp | head -n 1 | tr -d '\r\n')"
+          if [ "$code" != "$version" ]; then
+            echo "::error::KVersion in src/daemon.cpp ($code) differs from the version in sis/ntpsyncd.pkg ($version)"
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Build in the SDK image
+        run: bash group/docker-build.sh
+
+      - name: Name the package
+        env:
+          VERSION: ${{ steps.ver.outputs.version }}
+        run: |
+          mkdir dist
+          cp sis/ntpsyncd.sisx "dist/ntp-time-sync-$VERSION.sisx"
+          echo "Built ntp-time-sync-$VERSION.sisx ($(wc -c < "dist/ntp-time-sync-$VERSION.sisx") bytes)" >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: ntp-time-sync-${{ steps.ver.outputs.version }}
+          path: dist/*.sisx
+          if-no-files-found: error
+
+      - name: Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.ver.outputs.version }}
+        run: |
+          if [ "$GITHUB_REF_NAME" != "v$VERSION" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match sis/ntpsyncd.pkg ($VERSION); tag v$VERSION"
+            exit 1
+          fi
+          gh release create "$GITHUB_REF_NAME" "dist/ntp-time-sync-$VERSION.sisx" \
+            --title "NTP Time Sync $VERSION" --generate-notes
+          # The site's lite page carries the newest package (a release made with this
+          # job's token starts no other workflow by itself).
+          gh workflow run pages.yml --repo "$GITHUB_REPOSITORY" --ref main \
+            || echo "::warning::Pages not redeployed; run the Pages workflow by hand"
