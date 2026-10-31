@@ -191,7 +191,7 @@ if (!/[?&]full/.test(location.search) && /SymbianOS|SymbOS|Series ?60|Opera Mini
           <h3>You need</h3>
           <ul>
             <li><strong>A Nokia E72</strong> (S60 3rd Edition Feature Pack 2, Symbian OS 9.3). NTP Time Sync was written and tested on it. Other S60 3rd Edition phones may work but are untested.</li>
-            <li><strong>A hacked phone</strong> (InstallServer patch). Setting the system time needs the WriteDeviceData capability, which a self-signed package only gets on a patched phone. <a href="#why">Why?</a></li>
+            <li><strong>A hacked phone</strong> (AIO (open4all) enabled in ROMPatcher+). Setting the system time needs the WriteDeviceData capability, which a self-signed package only gets on a hacked phone. <a href="#why">Why?</a></li>
             <li><strong>Wi-Fi that lets NTP through</strong> (UDP port 123). Almost every home network does.</li>
           </ul>
         </div>
@@ -214,7 +214,7 @@ if (!/[?&]full/.test(location.search) && /SymbianOS|SymbOS|Series ?60|Opera Mini
         <li><strong><code>ReadDeviceData</code></strong> (system) to read the access point list: to pick out the Wi-Fi ones, show the checklist in Settings and the Wi-Fi name on the status screen.</li>
         <li><strong><code>NetworkServices</code></strong> (user) to send NTP packets. Self-signed packages get it as usual.</li>
       </ul>
-      <p>Symbian Signed, including its free per-IMEI developer certificates, has shut down, so there is no longer a legitimate way to get a signature with system capabilities. The "hack" is only the InstallServer patch: the installer skips the signature check and grants a self-signed package what it asks for. No Open4All or other patch is needed.</p>
+      <p>Symbian Signed, including its free per-IMEI developer certificates, has shut down, so there is no longer a legitimate way to get a signature with system capabilities. The "hack" is enabling AIO (open4all) in ROMPatcher+: the installer then skips the signature check and grants a self-signed package what it asks for.</p>
     </div>
   </div>
 </section>

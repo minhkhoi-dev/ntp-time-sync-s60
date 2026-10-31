@@ -71,9 +71,9 @@ Cần có:
 - **Nokia E72** (S60 3rd Edition Feature Pack 2, Symbian OS 9.3). NTP Time Sync
   được viết và chạy thử trên máy này. Các máy S60 3rd Edition khác có thể chạy
   được nhưng chưa được thử.
-- **Máy đã hack** (vá InstallServer). Dịch vụ cần quyền `WriteDeviceData` để đặt
-  giờ và `ReadDeviceData` để đọc danh sách điểm truy cập (app cần
-  `ReadDeviceData`); file tự ký chỉ có những quyền đó trên máy đã vá. Xem
+- **Máy đã hack** (đã bật AIO (open4all) - ROMPatcher+). Dịch vụ cần quyền
+  `WriteDeviceData` để đặt giờ và `ReadDeviceData` để đọc danh sách điểm truy cập
+  (app cần `ReadDeviceData`); file tự ký chỉ có những quyền đó trên máy đã hack. Xem
   [Vì sao cần máy đã hack](#vì-sao-cần-máy-đã-hack).
 
 Các bước:
@@ -137,9 +137,9 @@ chỉ có quyền người dùng, như dùng mạng.
 | `NetworkServices` | người dùng | Gửi gói NTP. Gói tự ký có quyền này bình thường |
 
 Symbian Signed, kể cả bản miễn phí khóa theo IMEI từng máy, đã ngừng hoạt động, nên
-không còn cách hợp lệ nào để có chữ ký mang quyền hệ thống. "Hack" ở đây chỉ là bản
-vá InstallServer: trình cài bỏ qua việc kiểm tra chữ ký và cấp đủ quyền cho gói tự
-ký. Không cần Open4All hay bản vá nào khác.
+không còn cách hợp lệ nào để có chữ ký mang quyền hệ thống. "Hack" ở đây là bật AIO
+(open4all) trong ROMPatcher+: trình cài bỏ qua việc kiểm tra chữ ký và cấp đủ quyền
+cho gói tự ký.
 
 ## File cài đặt (`C:\Data\ntpsyncd.ini`)
 
@@ -166,7 +166,7 @@ quá chu kỳ) nếu có điểm truy cập để tự bật.
 Các dòng nhật ký được ghi bằng tiếng Anh:
 
 - **"Could not set the clock (-46)… WriteDeviceData capability missing"**: gói cài
-  mất quyền. Ký lại và cài trên máy đã vá InstallServer.
+  mất quyền. Ký lại và cài trên máy đã bật AIO (open4all) - ROMPatcher+.
 - **"No Wi-Fi connection is up and no iap= is enabled"**: đánh dấu Wi-Fi của bạn ở
   Cài đặt → Điểm truy cập Wi-Fi, hoặc chọn **Đồng bộ ngay** rồi chọn trong danh sách.
 - **"No access point picked (-3)"**: danh sách bị hủy. Không có gì được lưu; lần

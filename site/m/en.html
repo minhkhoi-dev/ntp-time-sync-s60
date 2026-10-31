@@ -39,7 +39,7 @@ li { margin: 2px 0; }
 
 <div class="dl">
 <a href="https://github.com/minhkhoi-dev/ntp-time-sync-s60/releases/latest" id="dl">Download NTP Time Sync<!--VERSION--> (.sisx)</a>
-<small>Needs a hacked phone (InstallServer patch).</small>
+<small>Needs a hacked phone: AIO (open4all) enabled in ROMPatcher+.</small>
 </div>
 
 <h2>Install</h2>
@@ -69,7 +69,7 @@ li { margin: 2px 0; }
 <ul>
 <li><b>Updating:</b> if the installer says ntpsyncd is in use, open the app and choose Stop background sync; after installing, choose Start background sync.</li>
 <li><b>Uninstalling:</b> choose Stop background sync first.</li>
-<li><b>Why a hacked phone?</b> Setting the time needs the WriteDeviceData capability, which Symbian only grants to packages signed through Symbian Signed. That service has shut down, so only a phone with the InstallServer patch can install it.</li>
+<li><b>Why a hacked phone?</b> Setting the time needs the WriteDeviceData capability, which Symbian only grants to packages signed through Symbian Signed. That service has shut down, so only a phone with AIO (open4all) enabled in ROMPatcher+ can install it.</li>
 <li><b>Files:</b> settings in <span class="k">C:\Data\ntpsyncd.ini</span>, log in <span class="k">C:\Data\ntpsyncd.log</span>. The log stays on the phone.</li>
 <li><b>Can't download?</b> The stock S60 browser only has TLS 1.0 and GitHub needs TLS 1.2. Install the TLS patch (<a href="https://nnproject.cc/tls/">nnproject.cc/tls</a>), or download the file on a computer and copy it to the phone.</li>
 </ul>

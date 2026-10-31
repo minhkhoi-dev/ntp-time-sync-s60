@@ -73,10 +73,10 @@ You need:
 - **A Nokia E72** (S60 3rd Edition Feature Pack 2, Symbian OS 9.3). NTP Time
   Sync was written and tested on it. Other S60 3rd Edition phones may work but
   are untested.
-- **A hacked phone** (InstallServer patch). The daemon needs `WriteDeviceData`
-  to set the clock and `ReadDeviceData` to read the access point list (the app
-  needs `ReadDeviceData`); a self-signed package only gets those on a patched
-  phone. See [Why a hacked phone](#why-a-hacked-phone).
+- **A hacked phone** (AIO (open4all) enabled in ROMPatcher+). The daemon needs
+  `WriteDeviceData` to set the clock and `ReadDeviceData` to read the access
+  point list (the app needs `ReadDeviceData`); a self-signed package only gets
+  those on a hacked phone. See [Why a hacked phone](#why-a-hacked-phone).
 
 Steps:
 
@@ -141,9 +141,9 @@ Signed; a self-signed package only gets user capabilities, such as network acces
 
 Symbian Signed, including its free per-IMEI developer certificates, has shut
 down, so there is no longer a legitimate way to get a signature with system
-capabilities. The "hack" is only the InstallServer patch: the installer skips
-the signature check and grants a self-signed package what it asks for. No
-Open4All or other patch is needed.
+capabilities. The "hack" is enabling AIO (open4all) in ROMPatcher+: the
+installer then skips the signature check and grants a self-signed package what
+it asks for.
 
 ## Settings (`C:\Data\ntpsyncd.ini`)
 
@@ -169,8 +169,8 @@ minutes (capped at the interval) when it has access points to switch on.
 ## Troubleshooting
 
 - **"Could not set the clock (-46)… WriteDeviceData capability missing"**: the
-  package lost its capabilities. Re-sign it and install with the InstallServer
-  patch applied.
+  package lost its capabilities. Re-sign it and install it on a phone with AIO
+  (open4all) enabled in ROMPatcher+.
 - **"No Wi-Fi connection is up and no iap= is enabled"**: tick your Wi-Fi in
   Settings → Wi-Fi access points, or use **Sync now** and pick it from the list.
 - **"No access point picked (-3)"**: the list was cancelled. Nothing is saved;
