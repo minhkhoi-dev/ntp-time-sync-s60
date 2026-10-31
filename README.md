@@ -73,7 +73,8 @@ Cần có:
   được nhưng chưa được thử.
 - **Máy đã hack** (vá InstallServer). Dịch vụ cần quyền `WriteDeviceData` để đặt
   giờ và `ReadDeviceData` để đọc danh sách điểm truy cập (app cần
-  `ReadDeviceData`); file tự ký chỉ có những quyền đó trên máy đã vá.
+  `ReadDeviceData`); file tự ký chỉ có những quyền đó trên máy đã vá. Xem
+  [Vì sao cần máy đã hack](#vì-sao-cần-máy-đã-hack).
 
 Các bước:
 
@@ -122,6 +123,23 @@ Lần đồng bộ đầu tiên ngay sau khi cài trông như sau:
   đang chạy. File `C:\Data\ntpsyncd.ini` vẫn được giữ lại.
 - **Riêng tư:** chỉ liên lạc với các server NTP trong cài đặt (cổng UDP 123).
   Nhật ký nằm trên máy.
+
+### Vì sao cần máy đã hack
+
+Từ S60 3rd Edition, mỗi chương trình phải khai báo các quyền (capability) nó cần.
+Trình cài đặt chỉ cấp quyền hệ thống cho gói được ký qua Symbian Signed; gói tự ký
+chỉ có quyền người dùng, như dùng mạng.
+
+| Quyền | Loại | Dùng để |
+|---|---|---|
+| `WriteDeviceData` | hệ thống | Đặt giờ bằng `User::SetUTCTime`, cách duy nhất để chỉnh đồng hồ trên Symbian. Thiếu quyền này, app chỉ đo được độ lệch mà không chỉnh được |
+| `ReadDeviceData` | hệ thống | Đọc danh sách điểm truy cập: lọc ra Wi-Fi, hiện danh sách đánh dấu trong Cài đặt và tên Wi-Fi trên màn hình trạng thái |
+| `NetworkServices` | người dùng | Gửi gói NTP. Gói tự ký có quyền này bình thường |
+
+Symbian Signed, kể cả bản miễn phí khóa theo IMEI từng máy, đã ngừng hoạt động, nên
+không còn cách hợp lệ nào để có chữ ký mang quyền hệ thống. "Hack" ở đây chỉ là bản
+vá InstallServer: trình cài bỏ qua việc kiểm tra chữ ký và cấp đủ quyền cho gói tự
+ký. Không cần Open4All hay bản vá nào khác.
 
 ## File cài đặt (`C:\Data\ntpsyncd.ini`)
 

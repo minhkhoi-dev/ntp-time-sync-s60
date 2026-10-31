@@ -54,7 +54,7 @@ if (!/[?&]full/.test(location.search) && /SymbianOS|SymbOS|Series ?60|Opera Mini
           Source on GitHub
         </a>
       </div>
-      <p class="meta"><span class="js-ver" data-fmt="Version %s">Latest release on GitHub</span> · tested on a real E72 · needs a hacked phone (<a href="#install">see Install</a>)</p>
+      <p class="meta"><span class="js-ver" data-fmt="Version %s">Latest release on GitHub</span> · tested on a real E72 · needs a hacked phone (<a href="#why">why?</a>)</p>
     </div>
 
     <figure class="device" style="margin:0">
@@ -191,7 +191,7 @@ if (!/[?&]full/.test(location.search) && /SymbianOS|SymbOS|Series ?60|Opera Mini
           <h3>You need</h3>
           <ul>
             <li><strong>A Nokia E72</strong> (S60 3rd Edition Feature Pack 2, Symbian OS 9.3). NTP Time Sync was written and tested on it. Other S60 3rd Edition phones may work but are untested.</li>
-            <li><strong>A hacked phone</strong> (InstallServer patch). Setting the system time needs the WriteDeviceData capability, which a self-signed package only gets on a patched phone.</li>
+            <li><strong>A hacked phone</strong> (InstallServer patch). Setting the system time needs the WriteDeviceData capability, which a self-signed package only gets on a patched phone. <a href="#why">Why?</a></li>
             <li><strong>Wi-Fi that lets NTP through</strong> (UDP port 123). Almost every home network does.</li>
           </ul>
         </div>
@@ -205,6 +205,16 @@ if (!/[?&]full/.test(location.search) && /SymbianOS|SymbOS|Series ?60|Opera Mini
           </ul>
         </div>
       </div>
+    </div>
+    <div class="card why" id="why">
+      <h3>Why a hacked phone?</h3>
+      <p>Since S60 3rd Edition, every program declares the capabilities it needs. The installer only grants system capabilities to packages signed through Symbian Signed; a self-signed package only gets user capabilities, such as network access.</p>
+      <ul>
+        <li><strong><code>WriteDeviceData</code></strong> (system) to set the time with <code>User::SetUTCTime</code>, the only way to set the clock on Symbian. Without it the app could measure how far off the clock is, but not fix it.</li>
+        <li><strong><code>ReadDeviceData</code></strong> (system) to read the access point list: to pick out the Wi-Fi ones, show the checklist in Settings and the Wi-Fi name on the status screen.</li>
+        <li><strong><code>NetworkServices</code></strong> (user) to send NTP packets. Self-signed packages get it as usual.</li>
+      </ul>
+      <p>Symbian Signed, including its free per-IMEI developer certificates, has shut down, so there is no longer a legitimate way to get a signature with system capabilities. The "hack" is only the InstallServer patch: the installer skips the signature check and grants a self-signed package what it asks for. No Open4All or other patch is needed.</p>
     </div>
   </div>
 </section>

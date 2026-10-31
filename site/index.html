@@ -54,7 +54,7 @@ if (!/[?&]full/.test(location.search) && /SymbianOS|SymbOS|Series ?60|Opera Mini
           Mã nguồn trên GitHub
         </a>
       </div>
-      <p class="meta"><span class="js-ver" data-fmt="Phiên bản %s">Bản mới nhất trên GitHub</span> · đã chạy thử trên E72 thật · cần máy đã hack (<a href="#install">xem Cài đặt</a>)</p>
+      <p class="meta"><span class="js-ver" data-fmt="Phiên bản %s">Bản mới nhất trên GitHub</span> · đã chạy thử trên E72 thật · cần máy đã hack (<a href="#why">vì sao?</a>)</p>
     </div>
 
     <figure class="device" style="margin:0">
@@ -191,7 +191,7 @@ if (!/[?&]full/.test(location.search) && /SymbianOS|SymbOS|Series ?60|Opera Mini
           <h3>Bạn cần có</h3>
           <ul>
             <li><strong>Nokia E72</strong> (S60 3rd Edition Feature Pack 2, Symbian OS 9.3). NTP Time Sync được viết và chạy thử trên máy này. Các máy S60 3rd Edition khác có thể chạy được nhưng chưa được thử.</li>
-            <li><strong>Máy đã hack</strong> (vá InstallServer). Muốn đặt giờ hệ thống phải có quyền WriteDeviceData, và file tự ký chỉ có quyền đó trên máy đã vá.</li>
+            <li><strong>Máy đã hack</strong> (vá InstallServer). Muốn đặt giờ hệ thống phải có quyền WriteDeviceData, và file tự ký chỉ có quyền đó trên máy đã vá. <a href="#why">Vì sao?</a></li>
             <li><strong>Wi-Fi cho phép NTP</strong> (cổng UDP 123). Wi-Fi ở nhà hầu như đều được.</li>
           </ul>
         </div>
@@ -205,6 +205,16 @@ if (!/[?&]full/.test(location.search) && /SymbianOS|SymbOS|Series ?60|Opera Mini
           </ul>
         </div>
       </div>
+    </div>
+    <div class="card why" id="why">
+      <h3>Vì sao cần máy đã hack?</h3>
+      <p>Từ S60 3rd Edition, mỗi chương trình phải khai báo các quyền (capability) nó cần. Trình cài đặt chỉ cấp quyền hệ thống cho gói được ký qua Symbian Signed; gói tự ký chỉ có quyền người dùng, như dùng mạng.</p>
+      <ul>
+        <li><strong><code>WriteDeviceData</code></strong> (quyền hệ thống) để đặt giờ bằng <code>User::SetUTCTime</code>, cách duy nhất để chỉnh đồng hồ trên Symbian. Thiếu quyền này, app chỉ đo được độ lệch mà không chỉnh được.</li>
+        <li><strong><code>ReadDeviceData</code></strong> (quyền hệ thống) để đọc danh sách điểm truy cập: lọc ra Wi-Fi, hiện danh sách đánh dấu trong Cài đặt và tên Wi-Fi trên màn hình trạng thái.</li>
+        <li><strong><code>NetworkServices</code></strong> (quyền người dùng) để gửi gói NTP. Gói tự ký có quyền này bình thường.</li>
+      </ul>
+      <p>Symbian Signed, kể cả bản miễn phí khóa theo IMEI từng máy, đã ngừng hoạt động, nên không còn cách hợp lệ nào để có chữ ký mang quyền hệ thống. "Hack" ở đây chỉ là bản vá InstallServer: trình cài bỏ qua việc kiểm tra chữ ký và cấp đủ quyền cho gói tự ký. Không cần Open4All hay bản vá nào khác.</p>
     </div>
   </div>
 </section>

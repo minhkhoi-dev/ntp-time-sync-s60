@@ -76,7 +76,7 @@ You need:
 - **A hacked phone** (InstallServer patch). The daemon needs `WriteDeviceData`
   to set the clock and `ReadDeviceData` to read the access point list (the app
   needs `ReadDeviceData`); a self-signed package only gets those on a patched
-  phone.
+  phone. See [Why a hacked phone](#why-a-hacked-phone).
 
 Steps:
 
@@ -126,6 +126,24 @@ A first sync right after install looks like:
   may say ntpsyncd is in use. `C:\Data\ntpsyncd.ini` is kept.
 - **Privacy:** it only talks to the NTP servers in its settings (UDP port 123).
   The log stays on the phone.
+
+### Why a hacked phone
+
+Since S60 3rd Edition, every program declares the capabilities it needs. The
+installer only grants system capabilities to packages signed through Symbian
+Signed; a self-signed package only gets user capabilities, such as network access.
+
+| Capability | Kind | Used to |
+|---|---|---|
+| `WriteDeviceData` | system | Set the time with `User::SetUTCTime`, the only way to set the clock on Symbian. Without it the app could measure how far off the clock is, but not fix it |
+| `ReadDeviceData` | system | Read the access point list: pick out the Wi-Fi ones, show the checklist in Settings and the Wi-Fi name on the status screen |
+| `NetworkServices` | user | Send NTP packets. Self-signed packages get it as usual |
+
+Symbian Signed, including its free per-IMEI developer certificates, has shut
+down, so there is no longer a legitimate way to get a signature with system
+capabilities. The "hack" is only the InstallServer patch: the installer skips
+the signature check and grants a self-signed package what it asks for. No
+Open4All or other patch is needed.
 
 ## Settings (`C:\Data\ntpsyncd.ini`)
 
